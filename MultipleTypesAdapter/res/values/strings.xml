@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">MultipleTypesAdapter</string>
+    <string name="logo">com.ivanov.tech.multipletypesadapter</string>
+    <string name="subs">(demo activity)</string>
+    
+    
+</resources>
