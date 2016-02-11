@@ -5,4 +5,43 @@
     <string name="subs">(demo activity)</string>
     
     
+    <string name="fragment_details_textview_name_key">Name:</string>
+    <string name="fragment_details_textview_status_key">Status:</string>
+    <string name="fragment_details_button_close_text">Close</string>
+    <string name="fragment_tester_tittle">Users:</string>
+    
+    <string-array name="status_array">        
+        <item >Missing</item>
+        <item >Active</item>
+        <item >Deleted</item>        
+    </string-array>
+    
+    
+    <string name="fragment_details_group_name_key">Name of group:</string>
+    <string name="fragment_details_group_status_key">Your status in group:</string>
+    
+    <string-array name="status_in_group_array">        
+        <item >Common user</item>
+        <item >Super-admin (creater)</item>
+        <item >Admin</item>
+        <item >Banned</item>
+        <item >Missing status</item>          
+    </string-array>
+    
+    <string name="fragment_tester_button_update_text">Update</string>
+    <string name="fragment_details_imageview_photo_contentdescription">User\\\'s photo</string>
+    <string name="listview_item_imageview_icon_contentdescription">User\\\'s icon</string>
+    <string name="details_item_avatar_label">Upload photo</string>
+    <string name="fragment_text_button_save_text">Save</string>
+        
+    <string name="menu_update_users">Update users</string>
+    <string name="menu_update_groups">Update groups</string>
+    
+    <string name="menu_add">Add</string>
+	<string name="menu_add_group">Group chat</string>
+	
+    <string name="menu_ok">OK</string>
+    
+    <string name="selectusers_textview_empty">[Please, select users]</string>
+    
 </resources>

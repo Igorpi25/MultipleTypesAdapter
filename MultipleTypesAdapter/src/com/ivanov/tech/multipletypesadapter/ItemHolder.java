@@ -1,16 +1,15 @@
 package com.ivanov.tech.multipletypesadapter;
 
-import android.content.Context;
+import com.ivanov.tech.multipletypesadapter.demo.FragmentDemo;
+
 import android.view.View;
 import android.view.ViewGroup;
 
-public interface ItemHolder<Data> {
+public interface ItemHolder<T> {
+		
+	public ItemHolder<T> createClone();
 	
-	public ItemHolder<Data> getInstance(Context context,Object listener);
-	
-	public View getView(View convertView, ViewGroup parent, Data data);
-	
-	public void onItemClick(View view,int position, long id, Data data);
+	public View getView(View convertView, ViewGroup parent, T data);
 	
 	boolean isEnabled();
 }

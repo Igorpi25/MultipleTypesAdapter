@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:background="@color/color_white"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/details_item_static_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/window_pading"
+        android:text="Name"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/details_item_static_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/details_item_static_key"
+        android:layout_alignBottom="@+id/details_item_static_key"
+        android:layout_toRightOf="@+id/details_item_static_key"
+        android:text="Status"
+        android:textColor="@color/color_gray_dark" />
+    
+
+</RelativeLayout>
