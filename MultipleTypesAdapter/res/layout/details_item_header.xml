@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_transparent"
     android:gravity="center_vertical"
-    android:background="@color/color_white"
-    android:padding="10dp" >
+    android:paddingBottom="2dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="2dp" >
 
     <TextView
         android:id="@+id/details_item_header_key"
@@ -12,15 +15,31 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/window_pading"
-        android:text="Name" />
+        android:fontFamily="sans-serif"
+        android:text="Key"
+        android:textColor="@color/color_gray"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/details_item_header_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/details_item_header_key"
-        android:layout_alignBottom="@+id/details_item_header_key"
         android:layout_alignParentRight="true"
-        android:text="Status" />
+        android:layout_centerVertical="true"
+        android:fontFamily="sans-serif"
+        android:text="Value"
+        android:textColor="@color/color_gray"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/details_item_header_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-light"
+        android:text="Label"
+        android:textColor="@color/color_gray"
+        android:textSize="12sp" />
 
 </RelativeLayout>

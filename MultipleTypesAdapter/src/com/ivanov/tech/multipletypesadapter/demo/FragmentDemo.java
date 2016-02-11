@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorMultipleTypesAdapter;
 import com.ivanov.tech.multipletypesadapter.R;
+import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderHeader;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderLink;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderText;
 
@@ -38,7 +39,9 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     protected static final int TYPE_LINK_GROUP =3;
     
     protected static final int TYPE_TEXT =4;
-    protected static final int TYPE_TEXT_CLICKABLE =5;    
+    protected static final int TYPE_TEXT_CLICKABLE =5;
+    
+    protected static final int TYPE_HEADER =6;   
 	
 
     protected ListView listview;
@@ -55,15 +58,15 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;
-        view = inflater.inflate(R.layout.fragment_details, container, false);
+        view = inflater.inflate(R.layout.fragment_demo, container, false);
                 
         Log.d(TAG,"onCreateView");
         
-        listview=(ListView)view.findViewById(R.id.fragment_details_listview);
+        listview=(ListView)view.findViewById(R.id.fragment_demo_listview);
         
         adapter=new CursorMultipleTypesAdapter(getActivity(),null,adapter.FLAG_AUTO_REQUERY);
         
-        //Prepare map of types and set listeners for them
+        //Prepare map of types and set listeners for them        
         adapter.addItemHolder(TYPE_LINK_USER, new CursorItemHolderLink(getActivity(),this,this));                
         adapter.addItemHolder(TYPE_LINK_USER_GOD, new CursorItemHolderLink(getActivity(),this,new OnClickListener(){
 
@@ -90,6 +93,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         	}
         });
         
+        adapter.addItemHolder(TYPE_HEADER, new CursorItemHolderHeader(getActivity(),this));
         
         listview.setAdapter(adapter);
         
@@ -108,7 +112,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	
     	int _id=1;
     	try{
-    	//You can test when huge number of items
+    	//You can test when huge number of items. Just set i=100
     	for(int i=0;i<1;i++){
 	    		cursors_list.add(getMatrixCursor(_id));
     	}
@@ -128,6 +132,9 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	
     	JSONObject json;
     	
+    	json=new JSONObject("{key:'Links'}");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
+    	
     	json=new JSONObject("{name:'Igor Ivanov', status:'Android Developer', button:'link_user_button', button_text:'Accept', url_icon: 'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,11,json.toString()});
         
@@ -143,6 +150,9 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json=new JSONObject("{name:'Space', status:'66', label:'Free developers', url_icon:'https://vk.com/images/community_100.png'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_GROUP,21,json.toString()});
         
+    	json=new JSONObject("{key:'Text', label:'(variations)'}");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
+    	
     	json=new JSONObject("{key:'email', value:'igorpi25@gmail.com', icon:'true'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_CLICKABLE,31,json.toString()});
     	

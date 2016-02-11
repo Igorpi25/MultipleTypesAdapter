@@ -4,37 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/window_pading" 
-        android:background="@color/color_mat">
-
-        <TextView
-            android:id="@+id/fragment_tester_textview_tittle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:text="@string/fragment_tester_tittle"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <Button
-            android:id="@+id/fragment_tester_button_update"
-            style="@style/style_button_dialog_normal"
-            android:layout_width="@dimen/widget_width_small"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="@dimen/window_pading"
-            android:text="@string/fragment_tester_button_update_text" />
-
-    </RelativeLayout>
-
     <ListView
-        android:id="@+id/fragment_tester_listview"
+        android:id="@+id/fragment_demo_listview"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:background="@color/color_mat" >
 
     </ListView>
 
