@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+
 public class CursorMultipleTypesAdapter extends CursorAdapter implements OnItemClickListener{
 	
-	private static final String TAG = CursorMultipleTypesAdapter.class.getSimpleName();
+	private static final String TAG = CursorMultipleTypesAdapter.class.getSimpleName();	
 	
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_TYPE = "type";
 	public static final String COLUMN_KEY = "key";
-	public static final String COLUMN_VALUE = "value";  
-	
+	public static final String COLUMN_VALUE = "value";  	
 	
 	protected HashMap<Integer,ItemHolder> hashmap=new HashMap<Integer,ItemHolder>();
 	
@@ -42,7 +42,7 @@ public class CursorMultipleTypesAdapter extends CursorAdapter implements OnItemC
 		
 		ItemHolder holder=hashmap.get(getType(cursor)).createClone();
 		View view=holder.getView(null, viewgroup, cursor);
-		view.setTag(holder);
+		view.setTag(holder);		
 		
 		return view;
 	}
@@ -51,7 +51,7 @@ public class CursorMultipleTypesAdapter extends CursorAdapter implements OnItemC
 	public void onItemClick(AdapterView<?> parent, View view,
 			int position, long id) {
 		
-		getCursor().moveToPosition(position);
+		getCursor().moveToPosition(position);		
 		
 		OnItemClickListener onitemclicklistener=(OnItemClickListener)view.getTag();
 		onitemclicklistener.onItemClick(parent, view, position, id);		

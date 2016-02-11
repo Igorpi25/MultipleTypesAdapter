@@ -8,8 +8,8 @@ import org.json.JSONObject;
 
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorMultipleTypesAdapter;
 import com.ivanov.tech.multipletypesadapter.R;
-import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderLinkGroup;
-import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderLinkUser;
+import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderLink;
+import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderText;
 
 import android.database.Cursor;
 import android.database.MatrixCursor;
@@ -37,6 +37,8 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 
     protected static final int TYPE_LINK_GROUP =3;
     
+    protected static final int TYPE_TEXT =4;
+    protected static final int TYPE_TEXT_CLICKABLE =5;    
 	
 
     protected ListView listview;
@@ -62,8 +64,8 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         adapter=new CursorMultipleTypesAdapter(getActivity(),null,adapter.FLAG_AUTO_REQUERY);
         
         //Prepare map of types and set listeners for them
-        adapter.addItemHolder(TYPE_LINK_USER, new CursorItemHolderLinkUser(getActivity(),this,this));                
-        adapter.addItemHolder(TYPE_LINK_USER_GOD, new CursorItemHolderLinkUser(getActivity(),this,new OnClickListener(){
+        adapter.addItemHolder(TYPE_LINK_USER, new CursorItemHolderLink(getActivity(),this,this));                
+        adapter.addItemHolder(TYPE_LINK_USER_GOD, new CursorItemHolderLink(getActivity(),this,new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
@@ -71,7 +73,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 			}
         	
         }));
-        adapter.addItemHolder(TYPE_LINK_USER_NOT_CLICKABLE, new CursorItemHolderLinkUser(getActivity(),this,this){
+        adapter.addItemHolder(TYPE_LINK_USER_NOT_CLICKABLE, new CursorItemHolderLink(getActivity(),this,this){
         	
         	@Override
         	public boolean isEnabled() {
@@ -79,7 +81,15 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         	}
         });
         
-        adapter.addItemHolder(TYPE_LINK_GROUP, new CursorItemHolderLinkGroup(getActivity(),this));
+        adapter.addItemHolder(TYPE_LINK_GROUP, new CursorItemHolderLink(getActivity(),this,null));
+        adapter.addItemHolder(TYPE_TEXT, new CursorItemHolderText(getActivity(),this));
+        adapter.addItemHolder(TYPE_TEXT_CLICKABLE, new CursorItemHolderText(getActivity(),this){
+        	@Override
+        	public boolean isEnabled() {
+        		return true;
+        	}
+        });
+        
         
         listview.setAdapter(adapter);
         
@@ -98,9 +108,9 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	
     	int _id=1;
     	try{
+    	//You can test when huge number of items
     	for(int i=0;i<1;i++){
-	    		cursors_list.add(getUsersMatrixCursor(_id));
-	    		//cursors_list.add(getGroupsMatrixCursor(_id));
+	    		cursors_list.add(getMatrixCursor(_id));
     	}
     	}catch(JSONException e){
     		Log.e(TAG, "createMergeCursor JSONException e="+e);
@@ -112,7 +122,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	return mergecursor;    	
     }
     
-    protected MatrixCursor getUsersMatrixCursor(int _id) throws JSONException{
+    protected MatrixCursor getMatrixCursor(int _id) throws JSONException{
 
     	MatrixCursor matrixcursor=new MatrixCursor(new String[]{adapter.COLUMN_ID, adapter.COLUMN_TYPE, adapter.COLUMN_KEY, adapter.COLUMN_VALUE});    	
     	
@@ -130,10 +140,23 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json=new JSONObject("{name:'Not Clickable', status:'Dynamic type', url_icon:'https://vk.com/images/deactivated_100.png'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_NOT_CLICKABLE,14,json.toString()});
         
-    	json=new JSONObject("{name:'Space', status:'Free developers', label:'66', url_icon:'https://vk.com/images/community_100.png'}");    	
-    	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_GROUP,15,json.toString()});
+    	json=new JSONObject("{name:'Space', status:'66', label:'Free developers', url_icon:'https://vk.com/images/community_100.png'}");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_GROUP,21,json.toString()});
         
-    	    	
+    	json=new JSONObject("{key:'email', value:'igorpi25@gmail.com', icon:'true'}");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_CLICKABLE,31,json.toString()});
+    	
+    	json=new JSONObject("{key:'phone', value:'+79142966292', icon:'true'}");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_CLICKABLE,32,json.toString()});
+    	
+    	json=new JSONObject("{value:'Not clickable, and no icon'}");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT,33,json.toString()});
+    	
+    	json=new JSONObject("{value:'but clickable', key:'No icon,'}");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_CLICKABLE,34,json.toString()});
+    	
+    	
+    	
     	return matrixcursor;
     }
     
@@ -151,12 +174,28 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 			
 		}break;
 		
+		case TYPE_LINK_USER_GOD:{
+			int group_id=adapter.getKey(adapter.getCursor());
+			
+			toast("GOD ITEM CLICKED");
+			
+		}break;
+		
 		case TYPE_LINK_GROUP:{
 			int group_id=adapter.getKey(adapter.getCursor());
 			
 			toast("TYPE_LINK_GROUP item clicked key="+group_id);
 			
 		}break;
+		
+		case TYPE_TEXT:
+		case TYPE_TEXT_CLICKABLE:{
+			int key=adapter.getKey(adapter.getCursor());
+			
+			toast("TYPE_TEXT_CLICKABLE item clicked key="+key);
+			
+		}break;
+		
 		
 		}
 		
@@ -165,13 +204,15 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 	@Override
 	public void onClick(View v) {
 		
-		if(v.getTag(R.id.details_item_link_user_button)!=null){
-			int key=(Integer)v.getTag(R.id.details_item_link_user_button);
+		if(v.getTag(R.id.details_item_link_button)!=null){
+			int key=(Integer)v.getTag(R.id.details_item_link_button);
 			
 			toast("Button clicked tag="+v.getTag()+" key="+key);
 			
 		}
 	}
+	
+//-----------------------Utilites--------------------------
 	
 	private void toast(String msg){
 		Log.d(TAG, msg);

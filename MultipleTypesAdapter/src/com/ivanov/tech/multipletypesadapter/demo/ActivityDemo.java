@@ -1,10 +1,8 @@
 package com.ivanov.tech.multipletypesadapter.demo;
 
 import com.ivanov.tech.multipletypesadapter.R;
-import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderLinkGroup;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 

@@ -19,25 +19,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CursorItemHolderLinkUser extends CursorItemHolder {
+public class CursorItemHolderLink extends CursorItemHolder {
 
-	private static final String TAG = CursorItemHolderLinkUser.class.getSimpleName();
+	private static final String TAG = CursorItemHolderLink.class.getSimpleName();
 	
 	OnClickListener onclicklistener=null;
 	
-	TextView textview_name,textview_status;
+	TextView textview_name,textview_status,textview_label;
 	ImageView imageview_icon;
 	Button button;	
 	
-	public CursorItemHolderLinkUser(Context context, OnItemClickListener onitemclicklistener,OnClickListener onclicklistener) {
+	public CursorItemHolderLink(Context context, OnItemClickListener onitemclicklistener,OnClickListener onclicklistener) {
 		this.context=context;
 		this.onitemclicklistener=onitemclicklistener;
 		this.onclicklistener=onclicklistener;
 	}
 	
-	public CursorItemHolderLinkUser createClone(){	
+	public CursorItemHolderLink createClone(){	
 		Log.d(TAG, "createClone");
-		return new CursorItemHolderLinkUser(context,onitemclicklistener,onclicklistener);
+		return new CursorItemHolderLink(context,onitemclicklistener,onclicklistener);
 	}
 	
 	@Override
@@ -49,12 +49,13 @@ public class CursorItemHolderLinkUser extends CursorItemHolder {
 		
 			LayoutInflater layoutinflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			
-			view= layoutinflater.inflate(R.layout.details_item_link_user, parent, false);
+			view= layoutinflater.inflate(R.layout.details_item_link, parent, false);
 		
-			textview_name = (TextView) view.findViewById(R.id.details_item_link_user_name);
-	        textview_status = (TextView) view.findViewById(R.id.details_item_link_user_status);
-	        imageview_icon = (ImageView) view.findViewById(R.id.details_item_link_user_icon);
-	        button = (Button) view.findViewById(R.id.details_item_link_user_button);
+			textview_name = (TextView) view.findViewById(R.id.details_item_link_name);
+	        textview_status = (TextView) view.findViewById(R.id.details_item_link_status);
+	        textview_label = (TextView) view.findViewById(R.id.details_item_link_label);
+	        imageview_icon = (ImageView) view.findViewById(R.id.details_item_link_icon);
+	        button = (Button) view.findViewById(R.id.details_item_link_button);
         
 		}else{
 			view=convertView;
@@ -76,6 +77,13 @@ public class CursorItemHolderLinkUser extends CursorItemHolder {
 				textview_status.setText(json.getString("status"));				
 			}else{
 				textview_status.setVisibility(View.GONE);			
+			}
+			
+			if(!json.isNull("label")){
+				textview_label.setVisibility(View.VISIBLE);
+				textview_label.setText(json.getString("label"));				
+			}else{
+				textview_label.setVisibility(View.GONE);			
 			}
 			
 			
