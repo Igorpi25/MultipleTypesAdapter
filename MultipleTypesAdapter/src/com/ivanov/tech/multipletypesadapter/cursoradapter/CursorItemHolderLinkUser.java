@@ -64,7 +64,7 @@ public class CursorItemHolderLinkUser extends CursorItemHolder {
 		try {
 			json = new JSONObject(CursorMultipleTypesAdapter.getValue(cursor));
 			
-			Log.d(TAG, "bindView TYPE_LINK_USER json="+json+"imageview_icon.id");
+			Log.d(TAG, "getView TYPE_LINK_USER json="+json+"imageview_icon.id");
 			
 			if(!json.isNull("name"))
 				textview_name.setText(json.getString("name"));
@@ -75,8 +75,7 @@ public class CursorItemHolderLinkUser extends CursorItemHolder {
 				textview_status.setVisibility(View.VISIBLE);
 				textview_status.setText(json.getString("status"));				
 			}else{
-				textview_status.setVisibility(View.GONE);
-				textview_status.setText(context.getResources().getStringArray(R.array.status_array)[0]);				
+				textview_status.setVisibility(View.GONE);			
 			}
 			
 			
@@ -100,7 +99,7 @@ public class CursorItemHolderLinkUser extends CursorItemHolder {
 				imageview_icon.setImageResource(R.drawable.ic_no_icon);
 										
 		} catch (JSONException e) {
-			Log.e(TAG, "bindView TYPE_LINK_USER JSONException e="+e);
+			Log.e(TAG, "getView TYPE_LINK_USER JSONException e="+e);
 		}
 		
 		

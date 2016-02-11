@@ -21,10 +21,14 @@ public class CursorMultipleTypesAdapter extends CursorAdapter implements OnItemC
 	public static final String COLUMN_VALUE = "value";  
 	
 	
-	public HashMap<Integer,ItemHolder> hashmap=new HashMap<Integer,ItemHolder>();
+	protected HashMap<Integer,ItemHolder> hashmap=new HashMap<Integer,ItemHolder>();
 	
 	public CursorMultipleTypesAdapter(Context context, Cursor c, int flags) {
 		super(context, c, flags);
+	}
+	
+	public void addItemHolder(int type,ItemHolder itemholder){
+		hashmap.put(type, itemholder);
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class CursorItemHolderLinkGroup extends CursorItemHolder{
 	}
 	
 	@Override
-	public ItemHolder<Cursor> createClone() {
+	public CursorItemHolderLinkGroup createClone() {
 		
 		return new CursorItemHolderLinkGroup(context,onitemclicklistener);
 	}
@@ -61,17 +61,26 @@ public class CursorItemHolderLinkGroup extends CursorItemHolder{
 		try {
 			json = new JSONObject(CursorMultipleTypesAdapter.getValue(cursor));
 			
-			Log.d(TAG, "bindView TYPE_LINK_GROUP json="+json);
+			Log.d(TAG, "getView TYPE_LINK_GROUP json="+json);
 		
 			if(!json.isNull("name"))
 				textview_name.setText(json.getString("name"));
 			else 
 				textview_name.setText(json.getString(" "));
 			
-			if(!json.isNull("status"))
+			if(!json.isNull("status")){
+				textview_status.setVisibility(View.VISIBLE);
 				textview_status.setText(json.getString("status"));
-			else
-				textview_status.setText(context.getResources().getStringArray(R.array.status_array)[0]);
+			}else{
+				textview_status.setVisibility(View.GONE);
+			}
+			
+			if(!json.isNull("label")){
+				textview_label.setVisibility(View.VISIBLE);
+				textview_label.setText(json.getString("label"));
+			}else{
+				textview_label.setVisibility(View.GONE);
+			}
 			
 			
 			Glide.clear(imageview_icon);
@@ -80,7 +89,7 @@ public class CursorItemHolderLinkGroup extends CursorItemHolder{
 			else imageview_icon.setImageResource(R.drawable.ic_no_icon);
 			
 		} catch (JSONException e) {
-			Log.e(TAG, "bindView TYPE_LINK_USER JSONException e="+e);
+			Log.e(TAG, "getView TYPE_LINK_GROUP JSONException e="+e);
 		}
 		
 		
