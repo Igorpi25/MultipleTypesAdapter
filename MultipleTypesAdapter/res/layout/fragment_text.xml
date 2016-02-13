@@ -33,7 +33,7 @@
 	
 	    <Button
 	        android:id="@+id/fragment_text_button_save"
-	        style="@style/style_button_dialog_positive"
+	        style="@style/style_button_dialog"
 	        android:layout_width="@dimen/widget_width_small"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="right"

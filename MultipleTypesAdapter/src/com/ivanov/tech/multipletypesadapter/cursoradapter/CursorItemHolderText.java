@@ -82,6 +82,19 @@ public class CursorItemHolderText extends CursorItemHolder {
 			}else{
 				imageview_icon.setVisibility(View.GONE);
 			}
+			
+			int icon_id=R.drawable.ic_item_more;
+			if(!json.isNull("res_icon")){
+				icon_id=json.getInt("res_icon");
+			}
+			
+			Glide.clear(imageview_icon);
+			if(!json.isNull("url_icon")){				
+				Glide.with(context).load(json.getString("url_icon")).error(icon_id).placeholder(icon_id).into(imageview_icon);			
+			} else if(!json.isNull("res_icon")){
+				imageview_icon.setImageResource(icon_id);
+			}
+										
 										
 		} catch (JSONException e) {
 			Log.e(TAG, "getView TYPE_TEXT JSONException e="+e);

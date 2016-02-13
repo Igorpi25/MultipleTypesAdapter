@@ -100,11 +100,24 @@ public class CursorItemHolderLink extends CursorItemHolder {
 				button.setVisibility(View.GONE);
 			}
 						
+			if( (!json.isNull("icon")) && (json.getBoolean("icon")) ){
+				imageview_icon.setVisibility(View.VISIBLE);
+			}else{
+				imageview_icon.setVisibility(View.GONE);
+			}
+			
+			
+			int icon_id=R.drawable.ic_no_icon;
+			if(!json.isNull("res_icon")){
+				icon_id=json.getInt("res_icon");
+			}
+			
 			Glide.clear(imageview_icon);
-			if(!json.isNull("url_icon"))
-				Glide.with(context).load(json.getString("url_icon")).error(R.drawable.ic_no_icon).placeholder(R.drawable.ic_no_icon).into(imageview_icon);
-			else
-				imageview_icon.setImageResource(R.drawable.ic_no_icon);
+			if(!json.isNull("url_icon")){				
+				Glide.with(context).load(json.getString("url_icon")).error(icon_id).placeholder(icon_id).into(imageview_icon);			
+			} else if(!json.isNull("res_icon")){
+				imageview_icon.setImageResource(icon_id);
+			}
 										
 		} catch (JSONException e) {
 			Log.e(TAG, "getView TYPE_LINK_USER JSONException e="+e);
