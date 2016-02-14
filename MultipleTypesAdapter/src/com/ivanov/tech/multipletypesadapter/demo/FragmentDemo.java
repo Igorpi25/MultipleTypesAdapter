@@ -128,7 +128,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	int _id=1;
     	try{
     	//You can test when huge number of items. Just set i=100
-    	for(int i=0;i<1;i++){
+    	for(int i=0;i<50;i++){
 	    		cursors_list.add(getMatrixCursor(_id));
     	}
     	}catch(JSONException e){
@@ -165,7 +165,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json=new JSONObject("{name:'Not Clickable', status:'Default icon', icon:'true'}");
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_NOT_CLICKABLE,14,json.toString()});
         
-    	json=new JSONObject("{name:'Space', status:'66', label:'Free developers', icon:'true', url_icon:'https://vk.com/images/community_100.png'}");    	
+    	json=new JSONObject("{name:'Space', status:'66', label:'Group link', icon:'true', url_icon:'https://vk.com/images/community_100.png'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_GROUP,21,json.toString()});
         
     	json=new JSONObject("{key:'Text'}");    	
@@ -194,7 +194,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
             	
     	json=new JSONObject("{button:'button_negative', button_text:'Send message' }");
     	json.put("button_background", R.drawable.drawable_button_dialog_negative);
-    	json.put("button_text_color", getResources().getColor(R.color.color_white));
+    	json.put("button_text_color", R.color.color_white);
     	json.put("button_text_size_unit", TypedValue.COMPLEX_UNIT_SP);
     	json.put("button_text_size", 14.0f);
     	matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON,42,json.toString()});

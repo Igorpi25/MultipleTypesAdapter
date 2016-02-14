@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.bumptech.glide.Glide;
+import com.ivanov.tech.multipletypesadapter.BinderButton;
 import com.ivanov.tech.multipletypesadapter.R;
 import com.ivanov.tech.multipletypesadapter.demo.FragmentDemo;
 
@@ -87,26 +88,21 @@ public class CursorItemHolderLink extends CursorItemHolder {
 			}
 			
 			
-			if(!json.isNull("button")){
-				button.setVisibility(View.VISIBLE);
-				button.setText(json.getString("button_text"));
+		
+			if(new BinderButton(context,new JSONObject("{button_text_size:12, button_text_color:'"+R.color.color_selector_font+"'}")).bind(button, json)){			
 				button.setTag(json.getString("button"));
-				button.setTag(button.getId(), CursorMultipleTypesAdapter.getKey(cursor));	
-				
+				button.setTag(button.getId(), CursorMultipleTypesAdapter.getKey(cursor));				
 				if(onclicklistener!=null)
 					button.setOnClickListener(onclicklistener);
-				
-			}else{
-				button.setVisibility(View.GONE);
 			}
-						
+			
+				
 			if( (!json.isNull("icon")) && (json.getBoolean("icon")) ){
 				imageview_icon.setVisibility(View.VISIBLE);
 			}else{
 				imageview_icon.setVisibility(View.GONE);
 			}
-			
-			
+						
 			int icon_id=R.drawable.ic_no_icon;
 			if(!json.isNull("res_icon")){
 				icon_id=json.getInt("res_icon");
