@@ -26,9 +26,11 @@ public class BinderButton extends Binder<Button> {
 
 	@Override
 	protected boolean process(Button button, JSONObject json) throws JSONException{
-		Log.e(TAG, "process json="+json);
+		
+		//Log.d(TAG, "process json="+json);
+		
 		if(json.getBoolean("visible")){
-			Log.e(TAG, "process visible=true");
+			//Log.d(TAG, "process visible=true");
 			
 			button.setVisibility(View.VISIBLE);
 			button.setTag(json.getString("tag"));	

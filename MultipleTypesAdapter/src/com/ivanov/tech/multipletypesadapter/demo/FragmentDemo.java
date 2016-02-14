@@ -128,7 +128,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	int _id=1;
     	try{
     	//You can test when huge number of items. Just set i=100
-    	for(int i=0;i<1;i++){
+    	for(int i=0;i<5;i++){
 	    		cursors_list.add(getMatrixCursor(_id));
     	}
     	}catch(JSONException e){
@@ -153,37 +153,37 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json=new JSONObject("{key:'Links'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
-    	json=new JSONObject("{name:'Igor Ivanov', status:'Android Developer', button:{tag:'link_user_button', text:'Accept'}, icon:'true', url_icon: 'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'}");    	
+    	json=new JSONObject("{name:'Igor Ivanov', status:'Android Developer', button:{tag:'link_user_button', text:'Accept'}, icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,11,json.toString()});
         
-    	json=new JSONObject("{name:'Stepan Sotnikov', status:'Server Admin', button:{tag:'link_user_button', text:'Add'}, icon:'true', url_icon: 'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'}");    	
+    	json=new JSONObject("{name:'Stepan Sotnikov', status:'Server Admin', button:{tag:'link_user_button', text:'Add'}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,12,json.toString()});
         
-    	json=new JSONObject("{name:'God', status:'Dynamic type', button:{tag:'link_user_button', text:'Fuck'}, icon:'true', url_icon: 'https://cdn3.iconfinder.com/data/icons/gray-user-toolbar/512/holy-64.png'}");    	
+    	json=new JSONObject("{name:'God', status:'Dynamic type', button:{tag:'link_user_button', text:'Fuck'}, icon:{image_url:'https://cdn3.iconfinder.com/data/icons/gray-user-toolbar/512/holy-64.png'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_GOD,13,json.toString()});
         
-    	json=new JSONObject("{name:'Not Clickable', status:'Default icon', button:{visible:false}, icon:'true'}");
+    	json=new JSONObject("{name:'Not Clickable', status:'Default icon', button:{visible:false}, icon:{ } }");
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_NOT_CLICKABLE,14,json.toString()});
         
-    	json=new JSONObject("{name:'Space', status:'66', label:'Group link', button:{visible:false}, icon:'true', url_icon:'https://vk.com/images/community_100.png'}");    	
+    	json=new JSONObject("{name:'Space', status:'66', label:'Group link', button:{visible:false}, icon:{image_url:'https://vk.com/images/community_100.png'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_GROUP,21,json.toString()});
         
     	json=new JSONObject("{key:'Text'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
-    	json=new JSONObject("{key:'email', value:'igorpi25@gmail.com', icon:'true'}");    	
+    	json=new JSONObject("{key:'email', value:'igorpi25@gmail.com', icon:{ } }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_CLICKABLE,31,json.toString()});
     	
-    	json=new JSONObject("{key:'phone', value:'+79142966292', icon:'true'}");    	
+    	json=new JSONObject("{key:'phone', value:'+79142966292', icon:{ } }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_CLICKABLE,32,json.toString()});
     	
-    	json=new JSONObject("{value:'Not clickable, and no icon'}");    	
+    	json=new JSONObject("{value:'Not clickable, and no icon', icon:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT,33,json.toString()});
     	
-    	json=new JSONObject("{value:'but clickable', key:'No icon,'}");    	
+    	json=new JSONObject("{value:'but clickable', key:'No icon', icon:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_CLICKABLE,34,json.toString()});
     	
-    	json=new JSONObject("{value:'Upload photo', icon:'true', res_icon:'"+android.R.drawable.ic_menu_upload+"'}");    	
+    	json=new JSONObject("{value:'Upload photo', icon:{image_res:'"+android.R.drawable.ic_menu_upload+"'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_UPLOADER,35,json.toString()});
     	
     	json=new JSONObject("{key:'Buttons'}");    	
