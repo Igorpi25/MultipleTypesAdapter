@@ -89,8 +89,8 @@ public class CursorItemHolderLink extends CursorItemHolder {
 			
 			
 		
-			if(new BinderButton(context,new JSONObject("{button_text_size:12, button_text_color:'"+R.color.color_selector_font+"'}")).bind(button, json)){			
-				button.setTag(json.getString("button"));
+			if(new BinderButton(context,new JSONObject("{text_size:12, text_color:'"+R.color.color_selector_font+"'}")).bind(button, json.getJSONObject("button"))){			
+				
 				button.setTag(button.getId(), CursorMultipleTypesAdapter.getKey(cursor));				
 				if(onclicklistener!=null)
 					button.setOnClickListener(onclicklistener);

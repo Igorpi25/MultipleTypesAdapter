@@ -128,7 +128,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	int _id=1;
     	try{
     	//You can test when huge number of items. Just set i=100
-    	for(int i=0;i<50;i++){
+    	for(int i=0;i<1;i++){
 	    		cursors_list.add(getMatrixCursor(_id));
     	}
     	}catch(JSONException e){
@@ -153,19 +153,19 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json=new JSONObject("{key:'Links'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
-    	json=new JSONObject("{name:'Igor Ivanov', status:'Android Developer', button:'link_user_button', button_text:'Accept', icon:'true', url_icon: 'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'}");    	
+    	json=new JSONObject("{name:'Igor Ivanov', status:'Android Developer', button:{tag:'link_user_button', text:'Accept'}, icon:'true', url_icon: 'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,11,json.toString()});
         
-    	json=new JSONObject("{name:'Stepan Sotnikov', status:'Server Admin', button:'link_user_button', button_text:'Add', icon:'true', url_icon: 'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'}");    	
+    	json=new JSONObject("{name:'Stepan Sotnikov', status:'Server Admin', button:{tag:'link_user_button', text:'Add'}, icon:'true', url_icon: 'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,12,json.toString()});
         
-    	json=new JSONObject("{name:'God', status:'Dynamic type', button:'link_user_button', button_text:'Fuck', icon:'true', url_icon: 'https://cdn3.iconfinder.com/data/icons/gray-user-toolbar/512/holy-64.png'}");    	
+    	json=new JSONObject("{name:'God', status:'Dynamic type', button:{tag:'link_user_button', text:'Fuck'}, icon:'true', url_icon: 'https://cdn3.iconfinder.com/data/icons/gray-user-toolbar/512/holy-64.png'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_GOD,13,json.toString()});
         
-    	json=new JSONObject("{name:'Not Clickable', status:'Default icon', icon:'true'}");
+    	json=new JSONObject("{name:'Not Clickable', status:'Default icon', button:{visible:false}, icon:'true'}");
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_NOT_CLICKABLE,14,json.toString()});
         
-    	json=new JSONObject("{name:'Space', status:'66', label:'Group link', icon:'true', url_icon:'https://vk.com/images/community_100.png'}");    	
+    	json=new JSONObject("{name:'Space', status:'66', label:'Group link', button:{visible:false}, icon:'true', url_icon:'https://vk.com/images/community_100.png'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_GROUP,21,json.toString()});
         
     	json=new JSONObject("{key:'Text'}");    	
@@ -189,17 +189,17 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json=new JSONObject("{key:'Buttons'}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
-    	json=new JSONObject("{button:'button_normal', button_text:'Send message' }");    	
+    	json=new JSONObject("{button:{tag:'button_normal', text:'Send message'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON,41,json.toString()});
             	
-    	json=new JSONObject("{button:'button_negative', button_text:'Send message' }");
-    	json.put("button_background", R.drawable.drawable_button_dialog_negative);
-    	json.put("button_text_color", R.color.color_white);
-    	json.put("button_text_size_unit", TypedValue.COMPLEX_UNIT_SP);
-    	json.put("button_text_size", 14.0f);
-    	matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON,42,json.toString()});
+    	json=new JSONObject("{tag:'button_negative', text:'Negative button' }");
+    	json.put("background", R.drawable.drawable_button_dialog_negative);
+    	json.put("text_color", R.color.color_white);
+    	json.put("text_size_unit", TypedValue.COMPLEX_UNIT_SP);
+    	json.put("text_size", 14.0f);
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON,42,"{button: "+json.toString()+" }"});
     	
-    	json=new JSONObject("{button:'button_small', button_text:'Small' }");    	
+    	json=new JSONObject("{button:{tag:'button_small', text:'Small'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON_SMALL,43,json.toString()});
         
     	

@@ -74,8 +74,7 @@ public class CursorItemHolderButton extends CursorItemHolder {
 			Log.d(TAG, "getView TYPE_LINK_USER json="+json+"imageview_icon.id");
 			
 			
-			if(new BinderButton(context).bind(button, json)){			
-				button.setTag(json.getString("button"));
+			if(new BinderButton(context).bind(button, json.getJSONObject("button"))){
 				button.setTag(button.getId(), CursorMultipleTypesAdapter.getKey(cursor));				
 				if(onclicklistener!=null)
 					button.setOnClickListener(onclicklistener);
