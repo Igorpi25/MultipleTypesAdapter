@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import com.bumptech.glide.Glide;
 import com.ivanov.tech.multipletypesadapter.BinderButton;
 import com.ivanov.tech.multipletypesadapter.BinderImageView;
+import com.ivanov.tech.multipletypesadapter.BinderTextView;
 import com.ivanov.tech.multipletypesadapter.R;
 import com.ivanov.tech.multipletypesadapter.demo.FragmentDemo;
 
@@ -67,39 +68,25 @@ public class CursorItemHolderLink extends CursorItemHolder {
 		try {
 			json = new JSONObject(CursorMultipleTypesAdapter.getValue(cursor));
 			
-			Log.d(TAG, "getView TYPE_LINK_USER json="+json+"imageview_icon.id");
+			//Log.d(TAG, "getView TYPE_LINK_USER json="+json+"imageview_icon.id");
 			
-			if(!json.isNull("name"))
-				textview_name.setText(json.getString("name"));
-			else 
-				textview_name.setText(json.getString(" "));
-			
-			if(!json.isNull("status")){
-				textview_status.setVisibility(View.VISIBLE);
-				textview_status.setText(json.getString("status"));				
-			}else{
-				textview_status.setVisibility(View.GONE);			
+			if(new BinderTextView(context).bind(textview_name, json.getJSONObject("name"))){
 			}
 			
-			if(!json.isNull("label")){
-				textview_label.setVisibility(View.VISIBLE);
-				textview_label.setText(json.getString("label"));				
-			}else{
-				textview_label.setVisibility(View.GONE);			
+			if(new BinderTextView(context).bind(textview_status, json.getJSONObject("status"))){
 			}
 			
-			
+			if(new BinderTextView(context).bind(textview_label, json.getJSONObject("label"))){
+			}
 		
-			if(new BinderButton(context,new JSONObject("{text_size:12, text_color:'"+R.color.color_selector_font+"'}")).bind(button, json.getJSONObject("button"))){			
+			if(new BinderButton(context,new JSONObject("{text_size:12, text_color:'"+R.color.color_selector_font+"'}")).bind(button, json.getJSONObject("button"))){		
 				
 				button.setTag(button.getId(), CursorMultipleTypesAdapter.getKey(cursor));				
 				if(onclicklistener!=null)
 					button.setOnClickListener(onclicklistener);
-			}
-			
+			}			
 				
-			if(new BinderImageView(context).bind(imageview_icon, json.getJSONObject("icon"))){			
-				Log.d(TAG, "BinderImageView binded");
+			if(new BinderImageView(context).bind(imageview_icon, json.getJSONObject("icon"))){	
 			}
 										
 		} catch (JSONException e) {

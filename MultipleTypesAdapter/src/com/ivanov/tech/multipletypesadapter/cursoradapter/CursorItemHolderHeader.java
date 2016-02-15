@@ -3,6 +3,7 @@ package com.ivanov.tech.multipletypesadapter.cursoradapter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.ivanov.tech.multipletypesadapter.BinderTextView;
 import com.ivanov.tech.multipletypesadapter.R;
 
 import android.content.Context;
@@ -56,25 +57,16 @@ public class CursorItemHolderHeader extends CursorItemHolder {
 			
 			Log.d(TAG, "getView TYPE_TEXT json="+json);
 			
-			if(!json.isNull("key")){
-				textview_key.setVisibility(View.VISIBLE);
-				textview_key.setText(json.getString("key"));
-			}else{ 
-				textview_key.setVisibility(View.GONE);
+			JSONObject json_default=new JSONObject("{text_size:12}");
+			json_default.put("text_color", R.color.color_gray);
+			
+			if(new BinderTextView(context,json_default).bind(textview_key, json.getJSONObject("key"))){
 			}
 			
-			if(!json.isNull("value")){
-				textview_value.setVisibility(View.VISIBLE);
-				textview_value.setText(json.getString("value"));
-			}else{ 
-				textview_value.setVisibility(View.GONE);
+			if(new BinderTextView(context,json_default).bind(textview_value, json.getJSONObject("value"))){	
 			}
 			
-			if(!json.isNull("label")){
-				textview_label.setVisibility(View.VISIBLE);
-				textview_label.setText(json.getString("label"));
-			}else{ 
-				textview_label.setVisibility(View.GONE);
+			if(new BinderTextView(context,json_default).bind(textview_label, json.getJSONObject("label"))){	
 			}
 					
 		} catch (JSONException e) {

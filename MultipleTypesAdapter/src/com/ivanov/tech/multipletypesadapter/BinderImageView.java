@@ -36,6 +36,8 @@ public class BinderImageView extends Binder<ImageView> {
 			
 			if(!json.isNull("tag"))
 				imageview.setTag(json.getString("tag"));
+			else 
+				imageview.setTag(null);
 			
 			imageview.setBackgroundResource(json.getInt("background"));									
 			int image_res=json.getInt("image_res");		

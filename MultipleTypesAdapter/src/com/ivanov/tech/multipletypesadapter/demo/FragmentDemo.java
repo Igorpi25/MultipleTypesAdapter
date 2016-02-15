@@ -128,7 +128,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	int _id=1;
     	try{
     	//You can test when huge number of items. Just set i=100
-    	for(int i=0;i<5;i++){
+    	for(int i=0;i<1;i++){
 	    		cursors_list.add(getMatrixCursor(_id));
     	}
     	}catch(JSONException e){
@@ -147,46 +147,46 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	
     	JSONObject json;
     	
-    	json=new JSONObject("{label:'com.ivanov.tech.multipletypesadapter.demo'}");    	
+    	json=new JSONObject("{key:{visible:false}, value:{visible:false}, label:{text:'com.ivanov.tech.multipletypesadapter.demo'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
-    	json=new JSONObject("{key:'Links'}");    	
+    	json=new JSONObject("{key:{text:'Links'}, value:{visible:false}, label:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
-    	json=new JSONObject("{name:'Igor Ivanov', status:'Android Developer', button:{tag:'link_user_button', text:'Accept'}, icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
+    	json=new JSONObject("{ name:{text:'Igor Ivanov'}, status:{text:'Android Developer'}, label:{ visible:false }, button:{tag:'link_user_button', text:'Accept'}, icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,11,json.toString()});
         
-    	json=new JSONObject("{name:'Stepan Sotnikov', status:'Server Admin', button:{tag:'link_user_button', text:'Add'}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");    	
+    	json=new JSONObject("{name:{text:'Stepan Sotnikov'}, status:{text:'Server Admin'}, label:{ visible:false }, button:{tag:'link_user_button', text:'Add'}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,12,json.toString()});
         
-    	json=new JSONObject("{name:'God', status:'Dynamic type', button:{tag:'link_user_button', text:'Fuck'}, icon:{image_url:'https://cdn3.iconfinder.com/data/icons/gray-user-toolbar/512/holy-64.png'} }");    	
+    	json=new JSONObject("{name:{text:'God'}, status:{text:'Dynamic type'}, label:{ visible:false }, button:{tag:'link_user_button', text:'Fuck'}, icon:{image_url:'https://cdn3.iconfinder.com/data/icons/gray-user-toolbar/512/holy-64.png'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_GOD,13,json.toString()});
         
-    	json=new JSONObject("{name:'Not Clickable', status:'Default icon', button:{visible:false}, icon:{ } }");
+    	json=new JSONObject("{name:{text:'Not Clickable'}, status:{text:'Default icon'}, label:{ visible:false }, button:{visible:false}, icon:{ } }");
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_NOT_CLICKABLE,14,json.toString()});
         
-    	json=new JSONObject("{name:'Space', status:'66', label:'Group link', button:{visible:false}, icon:{image_url:'https://vk.com/images/community_100.png'} }");    	
+    	json=new JSONObject("{name:{text:'Space'}, status:{text:'66'}, label:{text:'Group link'}, button:{visible:false}, icon:{image_url:'https://vk.com/images/community_100.png'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_GROUP,21,json.toString()});
         
-    	json=new JSONObject("{key:'Text'}");    	
+    	json=new JSONObject("{key:{text:'Text'}, value:{visible:false}, label:{visible:false} } ");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
-    	json=new JSONObject("{key:'email', value:'igorpi25@gmail.com', icon:{ } }");    	
+    	json=new JSONObject("{key:{text:'email'}, value:{text:'igorpi25@gmail.com'}, icon:{ } }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_CLICKABLE,31,json.toString()});
     	
-    	json=new JSONObject("{key:'phone', value:'+79142966292', icon:{ } }");    	
+    	json=new JSONObject("{key:{text:'phone'}, value:{text:'+79142966292'}, icon:{ } }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_CLICKABLE,32,json.toString()});
     	
-    	json=new JSONObject("{value:'Not clickable, and no icon', icon:{visible:false} }");    	
+    	json=new JSONObject("{key:{ visible:false }, value:{text:'Not clickable, and no icon'}, icon:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT,33,json.toString()});
     	
-    	json=new JSONObject("{value:'but clickable', key:'No icon', icon:{visible:false} }");    	
+    	json=new JSONObject("{value:{text:'but clickable'}, key:{text:'No icon'}, icon:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_CLICKABLE,34,json.toString()});
     	
-    	json=new JSONObject("{value:'Upload photo', icon:{image_res:'"+android.R.drawable.ic_menu_upload+"'} }");    	
+    	json=new JSONObject("{value:{text:'Upload photo'}, key:{ visible:false }, icon:{image_res:'"+android.R.drawable.ic_menu_upload+"'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_UPLOADER,35,json.toString()});
     	
-    	json=new JSONObject("{key:'Buttons'}");    	
+    	json=new JSONObject("{key:{text:'Buttons'}, value:{visible:false}, label:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
     	json=new JSONObject("{button:{tag:'button_normal', text:'Send message'} }");    	
