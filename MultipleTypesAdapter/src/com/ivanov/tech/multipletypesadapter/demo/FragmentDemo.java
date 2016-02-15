@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorMultipleTypesAdapter;
 import com.ivanov.tech.multipletypesadapter.R;
+import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderImageView;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderButton;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderHeader;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderLink;
@@ -48,6 +49,9 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     
     protected static final int TYPE_BUTTON =8;  
     protected static final int TYPE_BUTTON_SMALL =9;  
+    
+    protected static final int TYPE_AVATAR =10;
+    protected static final int TYPE_PREVIEW =11;
 	
 
     protected ListView listview;
@@ -110,6 +114,9 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         adapter.addItemHolder(TYPE_BUTTON, new CursorItemHolderButton(getActivity(),this));
         adapter.addItemHolder(TYPE_BUTTON_SMALL, new CursorItemHolderButton(getActivity(),R.layout.details_item_button_small,R.id.details_item_button_small_button,this));
         
+        adapter.addItemHolder(TYPE_AVATAR, new CursorItemHolderImageView(getActivity(),R.layout.details_item_avatar,R.id.details_item_avatar_imageview,this));
+        adapter.addItemHolder(TYPE_PREVIEW, new CursorItemHolderImageView(getActivity(),R.layout.details_item_preview,R.id.details_item_preview_imageview,this));
+        
         listview.setAdapter(adapter);
         
         listview.setOnItemClickListener(adapter);
@@ -127,7 +134,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	
     	int _id=1;
     	try{
-    	//You can test when huge number of items. Just set i=100
+    	//You can test with huge number of items. Just set i=100
     	for(int i=0;i<1;i++){
 	    		cursors_list.add(getMatrixCursor(_id));
     	}
@@ -149,6 +156,16 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	
     	json=new JSONObject("{key:{visible:false}, value:{visible:false}, label:{text:'com.ivanov.tech.multipletypesadapter.demo'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
+    	
+    	json=new JSONObject("{key:{text:'Images'}, value:{visible:false}, label:{visible:false} }");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
+    	
+//    	json=new JSONObject("{ imageview:{image_url:'https://pp.vk.me/c616830/v616830795/11219/fODhFY2EpCQ.jpg'} }");    	
+//    	matrixcursor.addRow(new Object[]{++_id,TYPE_AVATAR,101,json.toString()});
+    	
+    	json=new JSONObject("{ imageview:{image_url:'https://pp.vk.me/c1682/u38531795/98572754/x_203d0029.jpg'} }");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_PREVIEW,102,json.toString()});
+    	
     	
     	json=new JSONObject("{key:{text:'Links'}, value:{visible:false}, label:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
@@ -268,6 +285,13 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 			int key=(Integer)v.getTag(R.id.details_item_button_button);
 			
 			toast("Button clicked tag="+v.getTag()+" key="+key);
+			
+		}
+		
+		if(v.getTag(R.id.details_item_avatar_imageview)!=null){
+			int key=(Integer)v.getTag(R.id.details_item_avatar_imageview);
+			
+			toast("Avatar image clicked");
 			
 		}
 	}
