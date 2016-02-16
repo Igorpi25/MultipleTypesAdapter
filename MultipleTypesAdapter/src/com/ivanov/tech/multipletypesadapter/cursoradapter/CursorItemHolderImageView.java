@@ -48,7 +48,7 @@ public class CursorItemHolderImageView extends CursorItemHolder {
 	}
 	
 	public CursorItemHolderImageView createClone(){	
-		Log.d(TAG, "createClone");
+		//Log.d(TAG, "createClone");
 		return new CursorItemHolderImageView(context,layout_id,imageview_in_layout_id,onclicklistener);
 	}
 	

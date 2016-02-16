@@ -7,9 +7,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorMultipleTypesAdapter;
+import com.ivanov.tech.multipletypesadapter.ItemHolder;
 import com.ivanov.tech.multipletypesadapter.R;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderImageView;
+import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolder;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderButton;
+import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderGridView;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderHeader;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderLink;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderText;
@@ -28,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class FragmentDemo extends DialogFragment implements OnItemClickListener,OnClickListener{
@@ -52,6 +56,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     
     protected static final int TYPE_AVATAR =10;
     protected static final int TYPE_PREVIEW =11;
+    protected static final int TYPE_GRIDVIEW =12;
 	
 
     protected ListView listview;
@@ -117,6 +122,20 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         adapter.addItemHolder(TYPE_AVATAR, new CursorItemHolderImageView(getActivity(),R.layout.details_item_avatar,R.id.details_item_avatar_imageview,this));
         adapter.addItemHolder(TYPE_PREVIEW, new CursorItemHolderImageView(getActivity(),R.layout.details_item_preview,R.id.details_item_preview_imageview,this));
         
+        adapter.addItemHolder(TYPE_GRIDVIEW, new CursorItemHolderGridView(getActivity(),getGridViewCursor(),new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				
+				
+				toast("TYPE_GRIDVIEW position="+position+" key="+id);
+				
+			}
+        	
+        }));
+        
+        
+        
         listview.setAdapter(adapter);
         
         listview.setOnItemClickListener(adapter);
@@ -166,6 +185,11 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json=new JSONObject("{ imageview:{image_url:'https://pp.vk.me/c1682/u38531795/98572754/x_203d0029.jpg'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_PREVIEW,102,json.toString()});
     	
+    	json=new JSONObject("{key:{text:'Nested adapter'}, value:{visible:false}, label:{visible:false} }");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
+    	
+    	json=new JSONObject("{visible:true}");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_GRIDVIEW,0,json.toString()});    	
     	
     	json=new JSONObject("{key:{text:'Links'}, value:{visible:false}, label:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
@@ -219,13 +243,45 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json=new JSONObject("{button:{tag:'button_small', text:'Small'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON_SMALL,43,json.toString()});
         
+    	return matrixcursor;
+    }
+    
+    protected MatrixCursor getGridViewCursor(){
+
+    	MatrixCursor matrixcursor=new MatrixCursor(new String[]{adapter.COLUMN_ID, adapter.COLUMN_TYPE, adapter.COLUMN_KEY, adapter.COLUMN_VALUE});
+    	
+    	try{
+    		
+	    	int _id=0;
+	    	
+	    	JSONObject json;
+	    		json=new JSONObject("{ name:{text:'Igor Ivanov'},  icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
+	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,11,json.toString()});
+	        
+	    	json=new JSONObject("{name:{text:'Stepan Sotnikov'}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");    	
+	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,12,json.toString()});
+	        
+	    	json=new JSONObject("{name:{text:'God'}, icon:{image_url:'https://cdn3.iconfinder.com/data/icons/gray-user-toolbar/512/holy-64.png'} }");    	
+	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,13,json.toString()});
+	        
+	    	json=new JSONObject("{name:{text:'Not Clickable'}, icon:{ } }");
+	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,14,json.toString()});
+	        
+	    	json=new JSONObject("{name:{text:'Space'}, icon:{image_url:'https://vk.com/images/community_100.png'} }");    	
+	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,21,json.toString()});
+	    	
+	    	json=new JSONObject("{name:{visible:false}, icon:{image_res:"+R.drawable.ic_add_user+"} }");    	
+	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,22,json.toString()});
+	    	
+    	}catch(JSONException e){
+    		Log.e(TAG, "createGridViewCursor JSONException e="+e);
+    	}
     	
     	return matrixcursor;
     }
     
 //--------------Adapter Callbacks----------------------
      
-
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		switch(adapter.getType(adapter.getCursor())){

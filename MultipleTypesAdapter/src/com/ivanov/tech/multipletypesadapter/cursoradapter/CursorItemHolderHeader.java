@@ -28,7 +28,7 @@ public class CursorItemHolderHeader extends CursorItemHolder {
 	}
 	
 	public CursorItemHolderHeader createClone(){	
-		Log.d(TAG, "createClone");
+		//Log.d(TAG, "createClone");
 		return new CursorItemHolderHeader(context,onitemclicklistener);
 	}
 	
@@ -55,7 +55,7 @@ public class CursorItemHolderHeader extends CursorItemHolder {
 		try {
 			json = new JSONObject(CursorMultipleTypesAdapter.getValue(cursor));
 			
-			Log.d(TAG, "getView TYPE_TEXT json="+json);
+			//Log.d(TAG, "getView TYPE_TEXT json="+json);
 			
 			JSONObject json_default=new JSONObject("{text_size:12}");
 			json_default.put("text_color", R.color.color_gray);

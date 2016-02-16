@@ -39,7 +39,7 @@ public class CursorItemHolderLink extends CursorItemHolder {
 	}
 	
 	public CursorItemHolderLink createClone(){	
-		Log.d(TAG, "createClone");
+		//Log.d(TAG, "createClone");
 		return new CursorItemHolderLink(context,onitemclicklistener,onclicklistener);
 	}
 	

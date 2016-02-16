@@ -28,10 +28,10 @@ public class BinderTextView extends Binder<TextView> {
 	@Override
 	protected boolean process(TextView textview, JSONObject json) throws JSONException{
 		
-		Log.d(TAG, "process json="+json);
+		//Log.d(TAG, "process json="+json);
 		
 		if(json.getBoolean("visible")){
-			Log.d(TAG, "process visible=true");
+			//Log.d(TAG, "process visible=true");
 			
 			textview.setVisibility(View.VISIBLE);
 			if(!json.isNull("tag"))

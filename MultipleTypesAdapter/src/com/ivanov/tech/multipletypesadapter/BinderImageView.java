@@ -28,9 +28,9 @@ public class BinderImageView extends Binder<ImageView> {
 
 	@Override
 	protected boolean process(ImageView imageview, JSONObject json) throws JSONException{
-		Log.d(TAG, "process json="+json);
+		//Log.d(TAG, "process json="+json);
 		if(json.getBoolean("visible")){
-			Log.d(TAG, "process visible=true");
+			//Log.d(TAG, "process visible=true");
 			
 			imageview.setVisibility(View.VISIBLE);
 			

@@ -21,22 +21,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CursorItemHolderText extends CursorItemHolder {
+public class CursorItemHolderLinkVertical extends CursorItemHolder {
 
-	private static final String TAG = CursorItemHolderText.class.getSimpleName();
+	private static final String TAG = CursorItemHolderLinkVertical.class.getSimpleName();
 	
 	
-	TextView textview_key,textview_value;
+	TextView textview_name;
 	ImageView imageview_icon;
 	
-	public CursorItemHolderText(Context context, OnItemClickListener onitemclicklistener) {
+	public CursorItemHolderLinkVertical(Context context, OnItemClickListener onitemclicklistener) {
 		this.context=context;
 		this.onitemclicklistener=onitemclicklistener;
 	}
 	
-	public CursorItemHolderText createClone(){	
-		//Log.d(TAG, "createClone");
-		return new CursorItemHolderText(context,onitemclicklistener);
+	public CursorItemHolderLinkVertical createClone(){	
+		Log.d(TAG, "createClone");
+		return new CursorItemHolderLinkVertical(context,onitemclicklistener);
 	}
 	
 	@Override
@@ -48,11 +48,10 @@ public class CursorItemHolderText extends CursorItemHolder {
 		
 			LayoutInflater layoutinflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			
-			view= layoutinflater.inflate(R.layout.details_item_text, parent, false);
+			view= layoutinflater.inflate(R.layout.details_item_grid_users_gridview_item, parent, false);
 		
-			textview_key = (TextView) view.findViewById(R.id.details_item_text_key);
-	        textview_value = (TextView) view.findViewById(R.id.details_item_text_value);
-	        imageview_icon = (ImageView) view.findViewById(R.id.details_item_text_icon);
+			textview_name = (TextView) view.findViewById(R.id.details_item_grid_users_gridview_item_textview);
+	        imageview_icon = (ImageView) view.findViewById(R.id.details_item_grid_users_gridview_item_imageview);
         
 		}else{
 			view=convertView;
@@ -62,20 +61,16 @@ public class CursorItemHolderText extends CursorItemHolder {
 		try {
 			json = new JSONObject(CursorMultipleTypesAdapter.getValue(cursor));
 			
-			//Log.d(TAG, "getView TYPE_TEXT json="+json);
+			Log.d(TAG, "getView TYPE_LINK_VERTICAL json="+json);
 			
-			if(new BinderTextView(context).bind(textview_key, json.getJSONObject("key"))){	
+			if(new BinderTextView(context,new JSONObject("{text_color:'"+R.color.color_gray_medial+"'}")).bind(textview_name, json.getJSONObject("name"))){	
 			}
 			
-			if(new BinderTextView(context).bind(textview_value, json.getJSONObject("value"))){
-			}
-			
-			
-			if(new BinderImageView(context,new JSONObject("{image_res:'"+R.drawable.ic_item_more+"'}")).bind(imageview_icon, json.getJSONObject("icon"))){			
+			if(new BinderImageView(context,new JSONObject("{image_res:'"+R.drawable.ic_no_icon+"'}")).bind(imageview_icon, json.getJSONObject("icon"))){			
 			}										
 										
 		} catch (JSONException e) {
-			Log.e(TAG, "getView TYPE_TEXT JSONException e="+e);
+			Log.e(TAG, "getView TYPE_LINK_VERTICAL JSONException e="+e);
 		}
 		
 		
@@ -84,7 +79,7 @@ public class CursorItemHolderText extends CursorItemHolder {
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return true;
 	}
 	
 

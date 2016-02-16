@@ -63,6 +63,12 @@ public class CursorMultipleTypesAdapter extends CursorAdapter implements OnItemC
 	}
 	
 	@Override
+	public long getItemId(int position){
+		getCursor().moveToPosition(position);
+		return getId(getCursor());	
+	}
+	
+	@Override
 	public int getItemViewType(int position){
 		Cursor cursor=this.getCursor();
 		cursor.moveToPosition(position);
@@ -74,7 +80,7 @@ public class CursorMultipleTypesAdapter extends CursorAdapter implements OnItemC
 		return hashmap.size();
 	}
 	
-	//-------------Cursor Getters Utilities----------------------
+//-------------Cursor Getters Utilities----------------------
 	
 	public static int getType(Cursor cursor){
     	return cursor.getInt(cursor.getColumnIndex(COLUMN_TYPE));
@@ -91,6 +97,7 @@ public class CursorMultipleTypesAdapter extends CursorAdapter implements OnItemC
     public static String getValue(Cursor cursor){
     	return cursor.getString(cursor.getColumnIndex(COLUMN_VALUE));
     }
-    
 
+
+	
 }
