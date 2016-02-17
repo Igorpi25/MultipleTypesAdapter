@@ -38,11 +38,13 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 	
 	private static final String TAG = FragmentDemo.class.getSimpleName();    
     
+	
+	//По константе переданной в getType, адаптер определяет ItemHolder, который должен его обработать
+	//Также используются в для обработки callback событий, приходящих от адаптера 
     protected static final int TYPE_LINK_USER = 0;
     protected static final int TYPE_LINK_USER_GOD = 1;
     protected static final int TYPE_LINK_USER_NOT_CLICKABLE = 2;
     
-
     protected static final int TYPE_LINK_GROUP =3;
     
     protected static final int TYPE_TEXT =4;
@@ -81,7 +83,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         
         adapter=new CursorMultipleTypesAdapter(getActivity(),null,adapter.FLAG_AUTO_REQUERY);
         
-        //Prepare map of types and set listeners for them        
+        //Prepare map of types and set listeners for them. There are different ways in which you can define ItemHolder      
         adapter.addItemHolder(TYPE_LINK_USER, new CursorItemHolderLink(getActivity(),this,this));                
         adapter.addItemHolder(TYPE_LINK_USER_GOD, new CursorItemHolderLink(getActivity(),this,new OnClickListener(){
 
@@ -127,9 +129,8 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				
-				
-				toast("TYPE_GRIDVIEW position="+position+" key="+id);
-				
+				//You should define callback-listeners like so on
+				toast("TYPE_GRIDVIEW position="+position+" key="+id);				
 			}
         	
         }));
@@ -147,6 +148,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     
 //------------Preparing cursor----------------------------
 	
+    //Merge cursor for testing the huge number of items
 	protected Cursor createMergeCursor(){
     	
     	List<Cursor> cursors_list=new ArrayList<Cursor>();	
@@ -155,7 +157,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	try{
     	//You can test with huge number of items. Just set i=100
     	for(int i=0;i<1;i++){
-	    		cursors_list.add(getMatrixCursor(_id));
+	    		cursors_list.add(getCursorForAdapter(_id));
     	}
     	}catch(JSONException e){
     		Log.e(TAG, "createMergeCursor JSONException e="+e);
@@ -167,30 +169,36 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	return mergecursor;    	
     }
     
-    protected MatrixCursor getMatrixCursor(int _id) throws JSONException{
+	
+    protected MatrixCursor getCursorForAdapter(int _id) throws JSONException{
 
     	MatrixCursor matrixcursor=new MatrixCursor(new String[]{adapter.COLUMN_ID, adapter.COLUMN_TYPE, adapter.COLUMN_KEY, adapter.COLUMN_VALUE});    	
     	
-    	JSONObject json;
-    	
+    	JSONObject json;    	
+
+//-------------------------- ItemHolder Header ---------------------------------
+    	    	
     	json=new JSONObject("{key:{visible:false}, value:{visible:false}, label:{text:'com.ivanov.tech.multipletypesadapter.demo'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
+//----------------------- ItemHolder ImageView ----------------------------------
+    	
     	json=new JSONObject("{key:{text:'Images'}, value:{visible:false}, label:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
-    	
-//    	json=new JSONObject("{ imageview:{image_url:'https://pp.vk.me/c616830/v616830795/11219/fODhFY2EpCQ.jpg'} }");    	
-//    	matrixcursor.addRow(new Object[]{++_id,TYPE_AVATAR,101,json.toString()});
-    	
+    	    	
     	json=new JSONObject("{ imageview:{image_url:'https://pp.vk.me/c1682/u38531795/98572754/x_203d0029.jpg'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_PREVIEW,102,json.toString()});
+
+//-------------------------- ItemHolder GridView ---------------------------------
     	
     	json=new JSONObject("{key:{text:'Nested adapter'}, value:{visible:false}, label:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
     	json=new JSONObject("{visible:true}");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_GRIDVIEW,0,json.toString()});    	
-    	
+
+//-------------------------- ItemHolder Link ---------------------------------
+    	      
     	json=new JSONObject("{key:{text:'Links'}, value:{visible:false}, label:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
@@ -208,7 +216,9 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         
     	json=new JSONObject("{name:{text:'Space'}, status:{text:'66'}, label:{text:'Group link'}, button:{visible:false}, icon:{image_url:'https://vk.com/images/community_100.png'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_GROUP,21,json.toString()});
-        
+ 
+//-------------------------- ItemHolder Text ---------------------------------
+    	
     	json=new JSONObject("{key:{text:'Text'}, value:{visible:false}, label:{visible:false} } ");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
@@ -226,7 +236,9 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	
     	json=new JSONObject("{value:{text:'Upload photo'}, key:{ visible:false }, icon:{image_res:'"+android.R.drawable.ic_menu_upload+"'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_TEXT_UPLOADER,35,json.toString()});
-    	
+
+//-------------------------- ItemHolder Button ---------------------------------
+    	    	    	
     	json=new JSONObject("{key:{text:'Buttons'}, value:{visible:false}, label:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
@@ -246,6 +258,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	return matrixcursor;
     }
     
+    //Используется как cursor для вложенного адаптера TYPE_GRIDVIEW
     protected MatrixCursor getGridViewCursor(){
 
     	MatrixCursor matrixcursor=new MatrixCursor(new String[]{adapter.COLUMN_ID, adapter.COLUMN_TYPE, adapter.COLUMN_KEY, adapter.COLUMN_VALUE});
@@ -255,7 +268,11 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 	    	int _id=0;
 	    	
 	    	JSONObject json;
-	    		json=new JSONObject("{ name:{text:'Igor Ivanov'},  icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
+	    	//This adapter can use TYPE_GRIDVIEW-type only. This is inside type of CursorItemHolderGridView-adapter
+	    	
+	  //-------------------------- ItemHolder Button ---------------------------------
+	    	
+	    	json=new JSONObject("{ name:{text:'Igor Ivanov'},  icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,11,json.toString()});
 	        
 	    	json=new JSONObject("{name:{text:'Stepan Sotnikov'}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");    	

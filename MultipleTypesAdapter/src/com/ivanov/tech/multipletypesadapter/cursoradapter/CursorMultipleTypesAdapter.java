@@ -63,12 +63,6 @@ public class CursorMultipleTypesAdapter extends CursorAdapter implements OnItemC
 	}
 	
 	@Override
-	public long getItemId(int position){
-		getCursor().moveToPosition(position);
-		return getId(getCursor());	
-	}
-	
-	@Override
 	public int getItemViewType(int position){
 		Cursor cursor=this.getCursor();
 		cursor.moveToPosition(position);
