@@ -1,11 +1,11 @@
 MultipleTypesAdapter
 ====================
 
-Архитектурное решение, которое позвляет использовать один адаптер с несколькими типами Item внутри одного ListView. Данное решение позволяет в будущем новые виды Item без изменения кода адаптера. Это актуально если адаптер используется в наследуемых фрагментах.
+Архитектурное решение, которое позволяет использовать несколько типов отображаемых элементов, внутри одного адаптера. Данное решение позволяет в будущем добавлять новые типы, без изменения существующего адаптера. 
 
-Вы можете ввести новые типы Item, не изменяя класса адаптера. Также вы можете ввести OnItemClickListener, как для новых типов, так и уже существующих. Кроме того вы можете реализвать OnClickListener, и другие типы callback-ов для любого View.
-
-Кастомизация приветствуется и одобряется, на всех уровнях архитектуры.
+События при клике
+------------------
+Архитектура позволяет выводить обработку колбэк-событий, интерфейсов OnClickListener и OnItemClickListener, во фрагмент. Это упрощает структуру кода. Вся логика может храниться в одном месте - в классе фрагмента.
 
 Пример кода
 -----------
@@ -37,6 +37,9 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         listview=(ListView)view.findViewById(R.id.fragment_demo_listview);
         
         adapter=new CursorMultipleTypesAdapter(getActivity(),null,adapter.FLAG_AUTO_REQUERY);
+        
+//---------------Preparing types wich will be used in adapter----------------------------
+
         adapter.addItemHolder(TYPE_LINK_USER, new CursorItemHolderLink(getActivity(),this,this)); 
         adapter.addItemHolder(TYPE_HEADER, new CursorItemHolderHeader(getActivity(),this));
         adapter.addItemHolder(TYPE_BUTTON, new CursorItemHolderButton(getActivity(),this));
@@ -44,12 +47,13 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(adapter);
         
-        adapter.changeCursor(getCursorForAdapter());
+        adapter.changeCursor(createCursorForAdapter());
         
         return view;
     }
     
-    protected MatrixCursor getCursorForAdapter(int _id){
+    
+    protected MatrixCursor createCursorForAdapter(int _id){
 
         MatrixCursor matrixcursor=new MatrixCursor(new String[]{adapter.COLUMN_ID, adapter.COLUMN_TYPE, adapter.COLUMN_KEY, adapter.COLUMN_VALUE});    	
         
@@ -75,6 +79,8 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         return matrixcursor;
     }
     
+//---------------------------Callbacks-------------------------  
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch(adapter.getType(adapter.getCursor())){
@@ -111,21 +117,21 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 Реализован паттерн ViewHolder, для каждого типа Item
 
 JSON-View биндеры
-------------
-Еще одно архитектурное решение, позволяющее сократить код и делать жизнь программиста веселее. Вы можете определить View-биндер однажды, и использовать его всю жизнь.
+-----------------
+Решение позволяющее сократить код и делать жизнь программиста веселее. Нужно для того, чтобы однажды определив View-биндер, использовать его всю жизнь.
 
 Предположим я создал Item-тип, внутри которого есть один ImageView, три TextView, и один Button:
 
 (обрезанный скрин Link User)
 
-для него используются(биндится) такой JSON:
+для него используются такой JSON:
 ```json
 { 
-  "icon":{  "image_url": "https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg" } 
+  "icon":{  "image_url": "https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg" }, 
   "name": { "text": "Igor Ivanov" }, 
   "status": { "text": "Android Developer" }, 
   "label": { "visible": false }, 
-  "button":{ "tag": "link_user_button", "text": "Accept"}, 
+  "button":{ "tag": "link_user_button", "text": "Accept"}
 }
 ```
 Фрагмент кода CursorItemHolderLink:
@@ -149,10 +155,13 @@ public View getView(View convertView, ViewGroup parent, Cursor cursor) {
 			view=convertView;
 		}
 		
+		//Берем JSON из курсора
 		JSONObject json = new JSONObject(CursorMultipleTypesAdapter.getValue(cursor));
-			
+		
+		//Читаем параметры ImageView
 		new BinderImageView(context).bind(imageview_icon, json.getJSONObject("icon"));
 		
+		//Читаем параметры 
 		new BinderTextView(context).bind(textview_name, json.getJSONObject("name"));
 		new BinderTextView(context).bind(textview_status, json.getJSONObject("status"));
 		new BinderTextView(context).bind(textview_label, json.getJSONObject("label"));
@@ -168,16 +177,35 @@ public View getView(View convertView, ViewGroup parent, Cursor cursor) {
 ...
 ```
 
-Обратите внимание на  `BinderImageView`, `BinderTextView`, `BinderButton` - это классы View-биндеров. Они берут параметры переданного в `bind(...)` json-объекта и биндят к свойствам View объекта. У каждого биндер-класса есть свои свойства и параметры: 
+`BinderImageView`, `BinderTextView`, `BinderButton` - это классы View-биндеров. Они берут параметры переданного в `bind(...)` json-объекта и биндят к соответствующим свойствам View. У каждого биндер-класса есть свои свойства и параметры: 
 
-Например, у BinderTextView следующие параметры:
+Например, у BinderTextView:
 * `text` - соответствует тексту TextView
 * `text_size` - размер шрифта
-* `text_size_unit` - величина в которых записано `text_size` (`COMPLEX_UNIT_SP`, `COMPLEX_UNIT_DP`, и т.п.)
+* `text_size_unit` - величина в которых задана `text_size` (`COMPLEX_UNIT_SP`, `COMPLEX_UNIT_DP`, и т.п.)
+* `text_color` -  цвет текста. Нужно передать id color-ресурса.
 
-Вы можете определить новые параметры, или новый View-биндер для вашего кастомного View-класса.
+Свойства BinderButton:
+* `tag` - строка переданная вот тут будет присвоена к tag. Используется в обработчике OnClickListener, чтобы выяснить источник колбэка
+* `background` - ресурс-id фонового drawable. Тут можно использовать color, drawable, selector
+* `text_color` - цвет текста. Нужно передать id color-ресурса
+* `text` - соответствует тексту Button
 
+Свойства ImageView:
+* `tag` - строка переданная вот тут будет присвоена к tag. Используется в обработчике OnClickListener, чтобы выяснить источник колбэка. ImageView может быть кликабельна
+* `background` - ресурс-id фонового drawable. Тут можно использовать color, drawable, selector
+* `image_res` - ресурс-id изображения
+* `image_url` - url-адрес изображения. Если не задано или url-адрес неправильный, то будет отображен drawable указанный в `image_res`
 
+Вы можете добавить нужные свойства, или изменить название существующего свойства. Также вы можете задать другой способ биндинга. Аналогично вы можете создать биндер для собственного кастомного View
+
+**Значение по умолчанию:**
+Для каждого биндера есть три уровня:
+1. Значение по умолчанию, заданное при создании класса биндера. Для этого нужно реализовать абстрактную функцию `createDefaultJson()`
+2. Значение переданное в конструкторе. При создании объекта биндера, вы передаете в конструкторе `context`. Вы можете передать `json`-объект в качестве второго параметра, тогда переданный объект будет перекрывать json-объект получаемый из `createDefaultJson()`.
+3. Значение `json` переданное в функцию `bind`, объекта биндера.
+
+Для перекрытия одного `json`-объекта другим `json`-обектом, используется функция `append` класса `Binder`.
 
 
 
