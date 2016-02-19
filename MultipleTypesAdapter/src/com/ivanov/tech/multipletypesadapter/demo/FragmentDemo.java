@@ -7,10 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorMultipleTypesAdapter;
-import com.ivanov.tech.multipletypesadapter.ItemHolder;
 import com.ivanov.tech.multipletypesadapter.R;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderImageView;
-import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolder;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderButton;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderGridView;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderHeader;
@@ -31,7 +29,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class FragmentDemo extends DialogFragment implements OnItemClickListener,OnClickListener{
@@ -42,7 +39,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 	//По константе переданной в getType, адаптер определяет ItemHolder, который должен его обработать
 	//Также используются в для обработки callback событий, приходящих от адаптера 
     protected static final int TYPE_LINK_USER = 0;
-    protected static final int TYPE_LINK_USER_GOD = 1;
+    protected static final int TYPE_LINK_USER_GIT = 1;
     protected static final int TYPE_LINK_USER_NOT_CLICKABLE = 2;
     
     protected static final int TYPE_LINK_GROUP =3;
@@ -85,11 +82,11 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         
         //Prepare map of types and set listeners for them. There are different ways in which you can define ItemHolder      
         adapter.addItemHolder(TYPE_LINK_USER, new CursorItemHolderLink(getActivity(),this,this));                
-        adapter.addItemHolder(TYPE_LINK_USER_GOD, new CursorItemHolderLink(getActivity(),this,new OnClickListener(){
+        adapter.addItemHolder(TYPE_LINK_USER_GIT, new CursorItemHolderLink(getActivity(),this,new OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
-				toast("FUCK YOU!");
+				toast("GIT CLICKED!");
 			}
         	
         }));
@@ -181,42 +178,26 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json=new JSONObject("{key:{visible:false}, value:{visible:false}, label:{text:'com.ivanov.tech.multipletypesadapter.demo'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
-//----------------------- ItemHolder ImageView ----------------------------------
-    	
-    	json=new JSONObject("{key:{text:'Images'}, value:{visible:false}, label:{visible:false} }");    	
-    	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
-    	    	
-    	json=new JSONObject("{ imageview:{image_url:'https://pp.vk.me/c1682/u38531795/98572754/x_203d0029.jpg'} }");    	
-    	matrixcursor.addRow(new Object[]{++_id,TYPE_PREVIEW,102,json.toString()});
-
-//-------------------------- ItemHolder GridView ---------------------------------
-    	
-    	json=new JSONObject("{key:{text:'Nested adapter'}, value:{visible:false}, label:{visible:false} }");    	
-    	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
-    	
-    	json=new JSONObject("{visible:true}");    	
-    	matrixcursor.addRow(new Object[]{++_id,TYPE_GRIDVIEW,0,json.toString()});    	
-
 //-------------------------- ItemHolder Link ---------------------------------
     	      
-    	json=new JSONObject("{key:{text:'Links'}, value:{visible:false}, label:{visible:false} }");    	
+    	json=new JSONObject("{key:{text:'Contacts'}, value:{visible:false}, label:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
-    	json=new JSONObject("{ name:{text:'Igor Ivanov'}, status:{text:'Android Developer'}, label:{ visible:false }, button:{tag:'link_user_button', text:'Accept'}, icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
+    	json=new JSONObject("{ name:{text:'Igor Ivanov'}, status:{text:'Android Developer'}, label:{ visible:false }, button:{visible:true, tag:'link_user_button', text:'Accept'}, icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,11,json.toString()});
         
-    	json=new JSONObject("{name:{text:'Stepan Sotnikov'}, status:{text:'Server Admin'}, label:{ visible:false }, button:{tag:'link_user_button', text:'Add'}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");    	
+    	json=new JSONObject("{name:{text:'Stepan Sotnikov'}, status:{text:'Server Admin'}, label:{ visible:true, text:'(new)' }, button:{tag:'link_user_button', text:'Accept', background: "+R.drawable.drawable_button_dialog_positive+", text_color: "+R.color.color_white+"}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,12,json.toString()});
         
-    	json=new JSONObject("{name:{text:'God'}, status:{text:'Dynamic type'}, label:{ visible:false }, button:{tag:'link_user_button', text:'Fuck'}, icon:{image_url:'https://cdn3.iconfinder.com/data/icons/gray-user-toolbar/512/holy-64.png'} }");    	
-    	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_GOD,13,json.toString()});
+    	json=new JSONObject("{name:{text:'GitHub'}, status:{text:'Dynamic type'}, label:{ visible:false }, button:{tag:'link_user_button', text:'Fork', background: "+R.drawable.drawable_button_dialog_positive+", text_color: "+R.color.color_white+"}, icon:{image_url:'https://cdn0.iconfinder.com/data/icons/octicons/1024/mark-github-128.png'} }");
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_GIT,13,json.toString()});
         
-    	json=new JSONObject("{name:{text:'Not Clickable'}, status:{text:'Default icon'}, label:{ visible:false }, button:{visible:false}, icon:{ } }");
+    	json=new JSONObject("{name:{text:'User'}, status:{text:'Default icon'}, label:{ visible:false }, button:{visible:false}, icon:{ } }");
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER_NOT_CLICKABLE,14,json.toString()});
         
-    	json=new JSONObject("{name:{text:'Space'}, status:{text:'66'}, label:{text:'Group link'}, button:{visible:false}, icon:{image_url:'https://vk.com/images/community_100.png'} }");    	
+    	json=new JSONObject("{name:{text:'Space 66'}, status:{visible: false}, label:{text:'Group link', text_color:'"+R.color.color_green+"'}, button:{visible:false}, icon:{image_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgO6MFvj2tMPUoOSbUnbHFFuSqSMEkBt0Y17oPpcH8h2vpZG5S'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_GROUP,21,json.toString()});
- 
+
 //-------------------------- ItemHolder Text ---------------------------------
     	
     	json=new JSONObject("{key:{text:'Text'}, value:{visible:false}, label:{visible:false} } ");    	
@@ -242,9 +223,9 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json=new JSONObject("{key:{text:'Buttons'}, value:{visible:false}, label:{visible:false} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
     	
-    	json=new JSONObject("{button:{tag:'button_normal', text:'Send message'} }");    	
+    	json=new JSONObject("{button:{tag:'button_normal', text:'asds', text_size: '36'} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON,41,json.toString()});
-            	
+             	
     	json=new JSONObject("{tag:'button_negative', text:'Negative button' }");
     	json.put("background", R.drawable.drawable_button_dialog_negative);
     	json.put("text_color", R.color.color_white);
@@ -252,9 +233,25 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     	json.put("text_size", 14.0f);
     	matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON,42,"{button: "+json.toString()+" }"});
     	
-    	json=new JSONObject("{button:{tag:'button_small', text:'Small'} }");    	
+    	json=new JSONObject("{button:{tag:'link_user_button', text:'Add', background: "+R.drawable.drawable_button_dialog_alter+", text_color: "+R.color.color_white+"} }");    	
     	matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON_SMALL,43,json.toString()});
         
+//----------------------- ItemHolder ImageView ----------------------------------
+    	
+    	json=new JSONObject("{key:{text:'Images'}, value:{visible:false}, label:{visible:false} }");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
+    	    	
+    	json=new JSONObject("{ imageview:{image_url:'http://eyakutia.com/wp-content/uploads/2012/04/yakutianhorserider_01.jpg'} }");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_PREVIEW,102,json.toString()});
+
+//-------------------------- ItemHolder GridView ---------------------------------
+    	
+    	json=new JSONObject("{key:{text:'Nested adapter'}, value:{visible:false}, label:{visible:false} }");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
+    	
+    	json=new JSONObject("{visible:true}");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_GRIDVIEW,0,json.toString()});  
+    	
     	return matrixcursor;
     }
     
@@ -270,25 +267,26 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 	    	JSONObject json;
 	    	//This adapter can use TYPE_GRIDVIEW-type only. This is inside type of CursorItemHolderGridView-adapter
 	    	
-	  //-------------------------- ItemHolder Button ---------------------------------
+	  //-------------------------- ItemHolder LinkVertical ---------------------------------
 	    	
-	    	json=new JSONObject("{ name:{text:'Igor Ivanov'},  icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
+	    	json=new JSONObject("{ name:{text:'Igor Ivanov'}, icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,11,json.toString()});
 	        
 	    	json=new JSONObject("{name:{text:'Stepan Sotnikov'}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,12,json.toString()});
 	        
-	    	json=new JSONObject("{name:{text:'God'}, icon:{image_url:'https://cdn3.iconfinder.com/data/icons/gray-user-toolbar/512/holy-64.png'} }");    	
+	    	json=new JSONObject("{name:{text:'GitHub'}, icon:{image_url:'https://cdn0.iconfinder.com/data/icons/octicons/1024/mark-github-128.png'} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,13,json.toString()});
 	        
-	    	json=new JSONObject("{name:{text:'Not Clickable'}, icon:{ } }");
+	    	json=new JSONObject("{name:{text:'User'}, icon:{ } }");
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,14,json.toString()});
 	        
-	    	json=new JSONObject("{name:{text:'Space'}, icon:{image_url:'https://vk.com/images/community_100.png'} }");    	
+	    	json=new JSONObject("{name:{text:'Space 66'}, icon:{image_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgO6MFvj2tMPUoOSbUnbHFFuSqSMEkBt0Y17oPpcH8h2vpZG5S'} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,21,json.toString()});
 	    	
 	    	json=new JSONObject("{name:{visible:false}, icon:{image_res:"+R.drawable.ic_add_user+"} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,22,json.toString()});
+	    	
 	    	
     	}catch(JSONException e){
     		Log.e(TAG, "createGridViewCursor JSONException e="+e);
@@ -310,7 +308,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 			
 		}break;
 		
-		case TYPE_LINK_USER_GOD:{
+		case TYPE_LINK_USER_GIT:{
 			int group_id=adapter.getKey(adapter.getCursor());
 			
 			toast("GOD ITEM CLICKED");
@@ -361,10 +359,10 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 			
 		}
 		
-		if(v.getTag(R.id.details_item_avatar_imageview)!=null){
-			int key=(Integer)v.getTag(R.id.details_item_avatar_imageview);
+		if(v.getTag(R.id.details_item_preview_imageview)!=null){
+			int key=(Integer)v.getTag(R.id.details_item_preview_imageview);
 			
-			toast("Avatar image clicked");
+			toast("Preview image clicked");
 			
 		}
 	}
