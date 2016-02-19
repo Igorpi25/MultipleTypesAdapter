@@ -3,10 +3,6 @@ MultipleTypesAdapter
 
 Архитектурное решение, которое позволяет использовать несколько типов отображаемых элементов, внутри одного адаптера. Данное решение позволяет в будущем добавлять новые типы, без изменения существующего адаптера. 
 
-События при клике
-------------------
-Архитектура позволяет выводить обработку колбэк-событий, интерфейсов OnClickListener и OnItemClickListener, во фрагмент. Это упрощает структуру кода. Вся логика может храниться в одном месте - в классе фрагмента.
-
 Пример кода
 -----------
 
@@ -239,7 +235,111 @@ new BinderButton(context,json_holder).bind(button3, jsonB);
 `button2` будет таким: `{tag:'button_normal', visible:true, text:'Send message', text_size: '36'}`<br>
 `button3` будет таким: `{tag:'button_normal', visible:true, text:'Add contact', text_size: '12'}`
 
+События при клике
+------------------
+Архитектура позволяет выводить обработку колбэк-событий, интерфейсов OnClickListener и OnItemClickListener во фрагмент. Это упрощает структуру кода, и дает удивительную гибкость.
 
+Вся логика может храниться в одном месте - в классе фрагмента:
+```java
+public class FragmentDemo extends DialogFragment implements OnItemClickListener,OnClickListener{
+    
+    protected static final int TYPE_LINK_USER = 1;
+    ...
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+       	...
+        adapter.addItemHolder(TYPE_LINK_USER, new CursorItemHolderLink(mContext, FragmentDemo.this, FragmentDemo.this)); 
+        ...
+        return view;
+    }
+    
+//---------------------------Callbacks-------------------------  
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch(adapter.getType(adapter.getCursor())){
+            case TYPE_LINK_USER:{
+                int user_id=adapter.getKey(adapter.getCursor());
+                //Item clicked
+            }break;
+        }
+    }
+    
+    @Override
+    public void onClick(View v) {
+        
+      if(v.getTag(R.id.details_item_link_button)!=null){
+          int key=(Integer)v.getTag(R.id.details_item_link_button);
+          int tag=(String)v.getTag();
+          //Button within item clicked
+      }
+      
+    }
+    
+}
+```
+
+Для одного класса `ItemHolder` можно задать несколько типов колбэков. Рассмотрим пример кастомизации `CursorItemHolderLink`:
+```java
+public class FragmentDemo extends DialogFragment implements OnItemClickListener,OnClickListener{
+    
+    protected static final int TYPE_LINK_USER = 1;
+    protected static final int TYPE_LINK_GROUP = 2;
+    protected static final int TYPE_LINK_ADMIN = 3;
+    
+    ...
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+       	...
+        adapter.addItemHolder(TYPE_LINK_USER, new CursorItemHolderLink(mContext, FragmentDemo.this, FragmentDemo.this));
+        adapter.addItemHolder(TYPE_LINK_GROUP, new CursorItemHolderLink(mContext, FragmentDemo.this, FragmentDemo.this));
+        
+        //Кастомизируем поведение на кнопку 
+        adapter.addItemHolder(TYPE_LINK_ADMIN, new CursorItemHolderLink(mContext, FragmentDemo.this, new OnClickListener(){
+        	
+        	@Override
+		public void onClick(View v) {
+			toast("You can't remove admin from contacts. Only God can do it");
+		}
+        })); 
+        ...
+        return view;
+    }
+    ...
+//---------------------------Callbacks-------------------------  
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch(adapter.getType(adapter.getCursor())){
+            case TYPE_LINK_USER:{
+                int user_id=adapter.getKey(adapter.getCursor());
+                //Item user has been clicked
+            }break;
+            
+            case TYPE_LINK_GROUP:{
+                int group_id=adapter.getKey(adapter.getCursor());
+                //Item group has been clicked
+            }break;
+        }
+    }
+    
+    @Override
+    public void onClick(View v) {
+        
+      if(v.getTag(R.id.details_item_link_button)!=null){
+          int key=(Integer)v.getTag(R.id.details_item_link_button);
+          int tag=(String)v.getTag();
+          //Button inside item clicked
+      }
+      
+    }
+    
+}
+```
+
+**Реализация нестандартного колбэка** ничем не отличается от реализации `onClickListener`. Посмотрите исходные коды
 
 
 
