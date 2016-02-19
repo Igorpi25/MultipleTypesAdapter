@@ -56,19 +56,19 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
         JSONObject json;    	
         try{
             //Header
-            json=new JSONObject("{key:{text:'Contacts:'}, value:{visible:false}, label:{visible:false} }");    	
+            json=new JSONObject("{key:{text:'Contacts'}, value:{visible:false}, label:{visible:false} }");
             matrixcursor.addRow(new Object[]{++_id,TYPE_HEADER,0,json.toString()});
             
             //Users
-            json=new JSONObject("{ name:{text:'Igor Ivanov'}, status:{text:'Android Developer'}, label:{ visible:false }, button:{tag:'link_user_button', text:'Accept'}, icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
+            json=new JSONObject("{ name:{text:'Igor Ivanov'}, status:{text:'Android Developer'}, label:{ visible:false }, button:{visible:false, tag:'link_user_button', text:'Show'}, icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");
             matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,11,json.toString()});
             
-            json=new JSONObject("{name:{text:'Stepan Sotnikov'}, status:{text:'Server Admin'}, label:{ visible:false }, button:{tag:'link_user_button', text:'Add'}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");    	
+            json=new JSONObject("{name:{text:'Stepan Sotnikov'}, status:{text:'Server Admin'}, label:{ visible:true, text:'(new)' }, button:{tag:'link_user_button', text:'Accept', background: "+R.drawable.drawable_button_dialog_positive+", text_color: "+R.color.color_white+"}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");
             matrixcursor.addRow(new Object[]{++_id,TYPE_LINK_USER,12,json.toString()});
             
             //Button "Add"
-            json=new JSONObject("{button:{tag:'button_normal', text:'Add'} }");    	
-            matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON,41,json.toString()});
+            json=new JSONObject("{button:{tag:'link_user_button', text:'Add', background: "+R.drawable.drawable_button_dialog_alter+", text_color: "+R.color.color_white+"} }");
+            matrixcursor.addRow(new Object[]{++_id,TYPE_BUTTON_SMALL,43,json.toString()});
         }cathc(JSONException e){
             //Log.e("FragmentDemo","onCreateView JSONException createMergeCursor e="+e)
         }
