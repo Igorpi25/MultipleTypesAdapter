@@ -3,6 +3,14 @@ MultipleTypesAdapter
 
 Архитектурное решение, которое позволяет использовать несколько типов отображаемых элементов, внутри одного адаптера. Данное решение позволяет в будущем добавлять новые типы, без изменения существующего адаптера. 
 
+Динамическая кастомизация:
+
+<img src="Screenshots/screenshot_demo_1.png" width="200">&nbsp;&nbsp;&nbsp;<img src="Screenshots/screenshot_demo_2.png" width="200">
+
+Биндинг ImageView из URL используя [Glid][9]. Вложенный адаптер GridView внутри адаптера ListView:
+
+<img src="Screenshots/screenshot_demo_3.png" width="200">
+
 Пример кода
 -----------
 
@@ -106,7 +114,7 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 }
 ```
 
-(Скриншот FragmentDemo)
+<img src="Screenshots/screenshot_code_example.png" width="200">
 
 Оптимизация
 -----------
@@ -118,7 +126,7 @@ JSON-View биндеры
 
 Предположим я создал Item-тип, в layout-е которого есть один ImageView, три TextView, и один Button:
 
-(обрезанный скрин Link User)
+<img src="Screenshots/screenshot_binder.png" width="200">
 
 для него используются такой JSON:
 ```json
@@ -235,6 +243,8 @@ new BinderButton(context,json_holder).bind(button3, jsonB);
 `button2` будет таким: `{tag:'button_normal', visible:true, text:'Send message', text_size: '36'}`<br>
 `button3` будет таким: `{tag:'button_normal', visible:true, text:'Add contact', text_size: '12'}`
 
+<img src="Screenshots/screenshot_binder_default.png" width="200">
+
 События при клике
 ------------------
 Архитектура позволяет выводить обработку колбэк-событий, интерфейсов OnClickListener и OnItemClickListener во фрагмент. Это упрощает структуру кода, и дает удивительную гибкость.
@@ -342,7 +352,14 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 **Реализация нестандартного колбэка** ничем не отличается от реализации `onClickListener`. Посмотрите исходные коды
 
 
+[1]: http://actionbarsherlock.com/
+[2]: https://github.com/mcxiaoke/android-volley
+[3]: https://github.com/Igorpi25/Connection
+[4]: https://github.com/Igorpi25/Server
+[5]: https://git-scm.com/book/en/v2/Git-Tools-Submodules/
+[6]: https://github.com/Igorpi25/Profile
+[7]: http://www.androidhive.info/2014/01/how-to-create-rest-api-for-android-app-using-php-slim-and-mysql-day-12-2/
 
-
-
-
+[8]: https://github.com/Igorpi25/Session
+[9]: https://github.com/bumptech/glide
+[10]:https://code.google.com/archive/p/httpclientandroidlib/
