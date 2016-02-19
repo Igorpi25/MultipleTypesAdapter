@@ -126,7 +126,7 @@ JSON-View биндеры
   "icon":{  "image_url": "https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg" }, 
   "name": { "text": "Igor Ivanov" }, 
   "status": { "text": "Android Developer" }, 
-  "label": { "visible": false }, 
+  "label": { "visible": true }, 
   "button":{ "tag": "link_user_button", "text": "Accept"}
 }
 ```
