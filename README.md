@@ -120,7 +120,7 @@ JSON-View биндеры
 -----------------
 Решение позволяющее сократить код и делать жизнь программиста веселее. Нужно для того, чтобы однажды определив View-биндер, использовать его всю жизнь.
 
-Предположим я создал Item-тип, внутри которого есть один ImageView, три TextView, и один Button:
+Предположим я создал Item-тип, в layout-е которого есть один ImageView, три TextView, и один Button:
 
 (обрезанный скрин Link User)
 
@@ -200,12 +200,49 @@ public View getView(View convertView, ViewGroup parent, Cursor cursor) {
 Вы можете добавить нужные свойства, или изменить название существующего свойства. Также вы можете задать другой способ биндинга. Аналогично вы можете создать биндер для собственного кастомного View
 
 **Значение по умолчанию:**
-Для каждого биндера есть три уровня:
-1. Значение по умолчанию, заданное при создании класса биндера. Для этого нужно реализовать абстрактную функцию `createDefaultJson()`
-2. Значение переданное в конструкторе. При создании объекта биндера, вы передаете в конструкторе `context`. Вы можете передать `json`-объект в качестве второго параметра, тогда переданный объект будет перекрывать json-объект получаемый из `createDefaultJson()`.
-3. Значение `json` переданное в функцию `bind`, объекта биндера.
+Чтобы избежать дублирования кода, биндер использует значения по умолчанию. Если в `json` объекте отсутствует значение для требуемого свойства View, то используется значение по умолчанию. Значение по умолчанию задается двумя путями:
 
-Для перекрытия одного `json`-объекта другим `json`-обектом, используется функция `append` класса `Binder`.
+1. Значение по умолчанию, заданное при создании класса биндера. Для этого нужно реализовать абстрактную функцию `createDefaultJson()` класса `Binder`
+2. Значение переданное в конструкторе при создании объекта биндера. Для этого `json`-объект передается во втором параметре конструктора. 
+
+ВНИМАНИЕ! Значение по умолчанию в конструкторе, перекрывает значение по умолчанию заданный через функцию `createDefaultJson()`. А значение переданное в качестве параметра для фукнкции `binder`, перекрывает значение в конструкторе.
+
+Пример биндера со значениями по умолчанию:
+```java
+public class BinderButton extends Binder<Button> {
+
+	...
+	
+	@Override
+	protected JSONObject createDefaultJson(){
+		return new JSONObject("{visible: true, text: 'asds', text_size: '16'}");
+	}
+}
+
+...
+Buttton button1=null;
+Buttton button2=null;
+Buttton button3=null;
+
+jsonA=new JSONObject("{text_size:36}");
+jsonB=new JSONObject("{text: 'Add contact'}");
+
+json_holder=new JSONObject("{tag:'button_normal', text:'Send message', text_size: 12}"); 
+
+new BinderButton(context).bind(button1, jsonA);
+new BinderButton(context,json_holder).bind(button2, jsonA);
+new BinderButton(context,json_holder).bind(button3, jsonB);
+```
+
+Конечный `json` для:<br>
+`button1` будет таким: `{visible:true, text:'asds', text_size: '36'}`<br>
+`button2` будет таким: `{tag:'button_normal', visible:true, text:'Send message', text_size: '36'}`<br>
+`button3` будет таким: `{tag:'button_normal', visible:true, text:'Add contact', text_size: '12'}`
+
+
+
+
+
 
 
 
