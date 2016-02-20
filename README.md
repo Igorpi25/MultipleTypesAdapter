@@ -351,15 +351,34 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 
 **Реализация нестандартного колбэка** ничем не отличается от реализации `onClickListener`. Посмотрите исходные коды
 
+Используемые библиотеки
+-----------------------
 
-[1]: http://actionbarsherlock.com/
+* [Volley][2]
+* [Glid][9] - для загрузки изображений из интернета, и кэширования
+ 
+Запуск демонстрационного приложения:
+------------------------------------
+* Добавьте проект в Workspace
+* Выполните Project->Clean
+* Выполните все из "Добавление проекта в Eclipse"
+* Можно запустить
+
+Использование в своем проекте:
+------------------------------
+* Выполните все из "Добавление проекта в Eclipse"
+* Сделайте проект Connection библиотекой
+* Добавьте проект Connection в качестве библиотеки в ваш проект
+* В манифесте добавьте строки:
+```xml	
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+```
+
+Пример использования библиотеки вы можете видеть в проекте [Profile][3]
+
 [2]: https://github.com/mcxiaoke/android-volley
-[3]: https://github.com/Igorpi25/Connection
-[4]: https://github.com/Igorpi25/Server
-[5]: https://git-scm.com/book/en/v2/Git-Tools-Submodules/
-[6]: https://github.com/Igorpi25/Profile
-[7]: http://www.androidhive.info/2014/01/how-to-create-rest-api-for-android-app-using-php-slim-and-mysql-day-12-2/
-
-[8]: https://github.com/Igorpi25/Session
 [9]: https://github.com/bumptech/glide
-[10]:https://code.google.com/archive/p/httpclientandroidlib/
+[3]: https://github.com/Igorpi25/Profile
