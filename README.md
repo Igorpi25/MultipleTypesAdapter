@@ -361,21 +361,8 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 ------------------------------------
 * Добавьте проект в Workspace
 * Выполните Project->Clean
-* Выполните все из "Добавление проекта в Eclipse"
 * Можно запустить
 
-Использование в своем проекте:
-------------------------------
-* Выполните все из "Добавление проекта в Eclipse"
-* Сделайте проект Connection библиотекой
-* Добавьте проект Connection в качестве библиотеки в ваш проект
-* В манифесте добавьте строки:
-```xml	
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-	<uses-permission android:name="android.permission.INTERNET" />
-```
 
 Пример использования библиотеки вы можете видеть в проекте [Profile][3]
 
