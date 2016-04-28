@@ -78,13 +78,13 @@ public class CursorItemHolderGridView extends CursorItemHolder {
 		
 		Log.d(TAG, "getView TYPE_GRIDVIEW");			
 		
-		int width = convertDpToPixels((15*3)+(60*4),context);
-        int height = convertDpToPixels(85*(this.cursor.getCount()/4),context);
+		int width = convertDpToPixels((76*4),context);
+        int height = convertDpToPixels(93*(this.cursor.getCount()/4),context);
                 
         if(this.cursor.getCount()%4 == 1)
-        	height=height+convertDpToPixels(60,context);//Поправка если Add выносится в отдельную строку
+        	height=height+convertDpToPixels(93,context);
         if(this.cursor.getCount()%4 > 1) 
-        	height=height+convertDpToPixels(85,context);//Поправка если юзер выносится
+        	height=height+convertDpToPixels(93,context);
         
         LinearLayout.LayoutParams gridLayoutParams = new LinearLayout.LayoutParams(width, height);
 		

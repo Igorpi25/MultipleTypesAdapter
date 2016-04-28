@@ -28,6 +28,7 @@ public class CursorItemHolderLinkVertical extends CursorItemHolder {
 	
 	TextView textview_name;
 	ImageView imageview_icon;
+	TextView textview_label;
 	
 	public CursorItemHolderLinkVertical(Context context, OnItemClickListener onitemclicklistener) {
 		this.context=context;
@@ -51,6 +52,7 @@ public class CursorItemHolderLinkVertical extends CursorItemHolder {
 			view= layoutinflater.inflate(R.layout.details_item_grid_users_gridview_item, parent, false);
 		
 			textview_name = (TextView) view.findViewById(R.id.details_item_grid_users_gridview_item_textview);
+			textview_label = (TextView) view.findViewById(R.id.details_item_grid_users_gridview_item_textview_label);
 	        imageview_icon = (ImageView) view.findViewById(R.id.details_item_grid_users_gridview_item_imageview);
         
 		}else{
@@ -61,9 +63,12 @@ public class CursorItemHolderLinkVertical extends CursorItemHolder {
 		try {
 			json = new JSONObject(CursorMultipleTypesAdapter.getValue(cursor));
 			
-			Log.d(TAG, "getView TYPE_LINK_VERTICAL json="+json);
+			//Log.d(TAG, "getView TYPE_LINK_VERTICAL json="+json);
 			
 			if(new BinderTextView(context,new JSONObject("{text_color:'"+R.color.color_gray_medial+"'}")).bind(textview_name, json.getJSONObject("name"))){	
+			}
+			
+			if(new BinderTextView(context,new JSONObject("{text_color:'"+R.color.color_green+"', visible:false}")).bind(textview_label, json.getJSONObject("label"))){	
 			}
 			
 			if(new BinderImageView(context,new JSONObject("{image_res:'"+R.drawable.ic_no_icon+"'}")).bind(imageview_icon, json.getJSONObject("icon"))){			

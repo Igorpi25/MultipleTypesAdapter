@@ -269,22 +269,22 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
 	    	
 	  //-------------------------- ItemHolder LinkVertical ---------------------------------
 	    	
-	    	json=new JSONObject("{ name:{text:'Igor Ivanov'}, icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg'} }");    	
+	    	json=new JSONObject("{ name:{text:'Igor Ivanov'}, icon:{image_url:'https://pp.vk.me/c616830/v616830795/1121c/AwzilQ3NWLs.jpg', label:{visible:false}} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,11,json.toString()});
 	        
-	    	json=new JSONObject("{name:{text:'Stepan Sotnikov'}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'} }");    	
+	    	json=new JSONObject("{name:{text:'Stepan Sotnikov'}, icon:{image_url:'https://pp.vk.me/c316130/u3906727/d_80cd5ad1.jpg'}, label:{visible:false} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,12,json.toString()});
 	        
-	    	json=new JSONObject("{name:{text:'GitHub'}, icon:{image_url:'https://cdn0.iconfinder.com/data/icons/octicons/1024/mark-github-128.png'} }");    	
+	    	json=new JSONObject("{name:{text:'GitHub'}, icon:{image_url:'https://cdn0.iconfinder.com/data/icons/octicons/1024/mark-github-128.png'}, label:{visible:false} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,13,json.toString()});
 	        
-	    	json=new JSONObject("{name:{text:'User'}, icon:{ } }");
+	    	json=new JSONObject("{name:{text:'User'}, icon:{ }, label:{visible:false} }");
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,14,json.toString()});
 	        
-	    	json=new JSONObject("{name:{text:'Space 66'}, icon:{image_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgO6MFvj2tMPUoOSbUnbHFFuSqSMEkBt0Y17oPpcH8h2vpZG5S'} }");    	
+	    	json=new JSONObject("{name:{text:'Space 66'}, icon:{image_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgO6MFvj2tMPUoOSbUnbHFFuSqSMEkBt0Y17oPpcH8h2vpZG5S'}, label:{visible:false} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,21,json.toString()});
 	    	
-	    	json=new JSONObject("{name:{visible:false}, icon:{image_res:"+R.drawable.ic_add_user+"} }");    	
+	    	json=new JSONObject("{name:{visible:false}, icon:{image_res:"+R.drawable.ic_add_user+"}, label:{visible:false} }");    	
 	    	matrixcursor.addRow(new Object[]{++_id,CursorItemHolderGridView.TYPE_GRIDVIEW_ITEM,22,json.toString()});
 	    	
 	    	

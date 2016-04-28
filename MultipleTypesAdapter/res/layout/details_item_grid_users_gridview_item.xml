@@ -1,34 +1,64 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/details_item_grid_users_gridview_item_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/color_white"
-    android:gravity="center_horizontal"
-    android:orientation="vertical" >
+    android:visibility="visible" >
 
-    <ImageView
-        android:id="@+id/details_item_grid_users_gridview_item_imageview"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/listview_item_imageview_icon_contentdescription"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_no_icon" />
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentTop="true"
+	    android:layout_marginLeft="8dp"
+	    android:layout_marginRight="8dp"
+	    android:layout_marginTop="8dp"
+	    android:background="@color/color_white"
+	    android:gravity="center_horizontal"
+	    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/details_item_grid_users_gridview_item_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:gravity="center_horizontal"
-        android:maxHeight="20dp"
-        android:maxLines="1"
-        android:maxWidth="50dp"
-        android:minHeight="20dp"
-        android:minWidth="50dp"
-        android:text="Name"
-        android:textColor="@color/color_gray_medial" />
+	    <ImageView
+	        android:id="@+id/details_item_grid_users_gridview_item_imageview"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:layout_gravity="center_horizontal"
+	        android:scaleType="centerInside"
+	        android:src="@drawable/ic_no_icon" />
 
-</LinearLayout>
+	    <TextView
+	        android:id="@+id/details_item_grid_users_gridview_item_textview"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:layout_marginTop="5dp"
+	        android:fontFamily="sans-serif-light"
+	        android:gravity="center_horizontal"
+	        android:maxHeight="20dp"
+	        android:maxLines="1"
+	        android:maxWidth="50dp"
+	        android:minHeight="20dp"
+	        android:minWidth="50dp"
+	        android:text="Name"
+	        android:textColor="@color/color_gray_medial"
+	        android:typeface="normal" />
+
+	</LinearLayout>
+
+	<TextView
+	    android:id="@+id/details_item_grid_users_gridview_item_textview_label"
+	    android:layout_width="wrap_content"
+	    android:layout_height="15dp"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentTop="true"
+	    android:background="@drawable/drawable_label"
+	    android:fontFamily="sans-serif-light"
+	    android:gravity="center"
+	    android:paddingLeft="5dp"
+	    android:paddingRight="5dp"
+	    android:text="Admin"
+	    android:textColor="@color/color_green"
+	    android:textSize="10dp"
+	    android:visibility="visible" />
+
+</RelativeLayout>

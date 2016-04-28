@@ -5,18 +5,18 @@
     android:background="@color/color_white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="5dp" >
 
     <GridView
         android:id="@+id/details_item_grid_users_gridview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:columnWidth="60dp"
+        android:columnWidth="76dp"
         android:gravity="left"
-        android:horizontalSpacing="15dp"
+        android:horizontalSpacing="0dp"
         android:numColumns="4"
+        android:scrollbars="none"
         android:stretchMode="none"
-        android:verticalSpacing="10dp" 
-        android:scrollbars="none"/>
+        android:verticalSpacing="2dp" />
 
 </LinearLayout>

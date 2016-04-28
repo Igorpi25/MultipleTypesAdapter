@@ -14,7 +14,6 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:contentDescription="@string/listview_item_imageview_icon_contentdescription"
         android:padding="5dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_no_icon" />
