@@ -31,7 +31,7 @@ public class BinderTextView extends Binder<TextView> {
 		//Log.d(TAG, "process json="+json);
 		
 		if(json.getBoolean("visible")){
-			//Log.d(TAG, "process visible=true");
+			//Log.d(TAG, "process visible=true");			
 			
 			textview.setVisibility(View.VISIBLE);
 			if(!json.isNull("tag"))
