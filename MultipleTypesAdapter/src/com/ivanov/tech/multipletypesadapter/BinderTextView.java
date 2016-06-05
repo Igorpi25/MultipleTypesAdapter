@@ -63,4 +63,8 @@ public class BinderTextView extends Binder<TextView> {
 		return json;
 	}
 
+	public BinderTextView bindText(TextView textview, JSONObject json) throws JSONException{
+		textview.setText(json.getString("text"));
+		return this;
+	}
 }
