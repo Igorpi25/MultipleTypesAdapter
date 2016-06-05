@@ -31,9 +31,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class FragmentDemo extends DialogFragment implements OnItemClickListener,OnClickListener{
+public class FragmentDemoMD extends DialogFragment implements OnItemClickListener,OnClickListener{
 	
-	private static final String TAG = FragmentDemo.class.getSimpleName();    
+	private static final String TAG = FragmentDemoMD.class.getSimpleName();    
     
 	
 	//ѕо константе переданной в getType, адаптер определ€ет ItemHolder, который должен его обработать
@@ -63,8 +63,8 @@ public class FragmentDemo extends DialogFragment implements OnItemClickListener,
     protected CursorMultipleTypesAdapter adapter=null;
     
     
-    public static FragmentDemo newInstance() {
-    	FragmentDemo f = new FragmentDemo();        
+    public static FragmentDemoMD newInstance() {
+    	FragmentDemoMD f = new FragmentDemoMD();        
        
         return f;
     }

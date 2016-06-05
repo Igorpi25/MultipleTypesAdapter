@@ -27,4 +27,6 @@
     <dimen name="addusers_horizontal_height">60dp</dimen>
     <dimen name="addusers_horizontal_imageview_size">40dp</dimen>
     
+    <dimen name="card_margin">16dp</dimen>
+    
 </resources>

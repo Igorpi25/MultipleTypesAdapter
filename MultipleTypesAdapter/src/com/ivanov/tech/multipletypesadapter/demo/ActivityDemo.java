@@ -19,8 +19,7 @@ public class ActivityDemo extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_demo);
-        
-        
+                
         showDemo();
         
     }
@@ -30,6 +29,13 @@ public class ActivityDemo extends FragmentActivity {
         fragmentManager.beginTransaction()
                 .replace(R.id.main_container, new FragmentDemo())
                 .commit();
-   }
+    }
+    
+    public void showDemoMD(){
+      	 FragmentManager fragmentManager = getSupportFragmentManager();
+           fragmentManager.beginTransaction()
+                   .replace(R.id.main_container, new FragmentDemoMD())
+                   .commit();
+    }
     
 }
