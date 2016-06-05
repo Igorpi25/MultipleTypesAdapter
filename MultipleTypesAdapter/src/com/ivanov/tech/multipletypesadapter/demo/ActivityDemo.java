@@ -3,14 +3,14 @@ package com.ivanov.tech.multipletypesadapter.demo;
 import com.ivanov.tech.multipletypesadapter.R;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentManager;
 
 
 /**
  * Created by Igor on 15.01.15.
  */
-public class ActivityDemo extends FragmentActivity {
+public class ActivityDemo extends AppCompatActivity {
 
 	private String TAG=ActivityDemo.class.getSimpleName();
 	
@@ -18,10 +18,8 @@ public class ActivityDemo extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_demo);
-                
-        showDemo();
-        
+        setContentView(R.layout.activity_demo);                
+        showDemoMD();
     }
 
     public void showDemo(){
@@ -35,7 +33,7 @@ public class ActivityDemo extends FragmentActivity {
       	 FragmentManager fragmentManager = getSupportFragmentManager();
            fragmentManager.beginTransaction()
                    .replace(R.id.main_container, new FragmentDemoMD())
-                   .commit();
+                   .commit();           
     }
     
 }

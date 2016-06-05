@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -33,13 +34,14 @@ public class CursorMultipleTypesAdapter extends CursorRecyclerViewAdapter<Cursor
 
 	@Override
 	public void onBindViewHolder(CursorItemHolder itemHolder, Cursor cursor) {
-		itemHolder.bind(cursor);
+		Log.d(TAG, "onBindViewHolder");	
+		itemHolder.bindView(cursor);
 	}
-
+	
 	@Override
 	public CursorItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		
-		return hashmap.get(viewType).createClone();
+		Log.d(TAG, "onCreateViewHolder");		
+		return hashmap.get(viewType).createClone(parent);
 	}
 	
 	@Override
