@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.ivanov.tech.multipletypesadapter.cursoradapter_recyclerview.CursorMultipleTypesAdapter;
 import com.ivanov.tech.multipletypesadapter.cursoradapter_recyclerview.ItemHolderCardPreview;
+import com.ivanov.tech.multipletypesadapter.cursoradapter_recyclerview.ItemHolderCardProduct;
 import com.ivanov.tech.multipletypesadapter.R;
 
 import android.database.Cursor;
@@ -32,6 +33,7 @@ public class FragmentDemoMD extends DialogFragment implements OnClickListener{
 	//По константе переданной в getType, адаптер определяет ItemHolder, который должен его обработать
 	//Также используются в для обработки callback событий, приходящих от адаптера 
     protected static final int TYPE_CARD_PREVIEW = 0;
+    protected static final int TYPE_CARD_PRODUCT = 1;
 	
 
     protected RecyclerView recyclerview;
@@ -58,6 +60,7 @@ public class FragmentDemoMD extends DialogFragment implements OnClickListener{
       
         //Prepare map of types and set listeners for them. There are different ways in which you can define ItemHolder      
         adapter.addItemHolder(TYPE_CARD_PREVIEW, new ItemHolderCardPreview(getActivity(),this));                
+        adapter.addItemHolder(TYPE_CARD_PRODUCT, new ItemHolderCardProduct(getActivity(),this));
              
         recyclerview.setAdapter(adapter);
         
@@ -77,7 +80,7 @@ public class FragmentDemoMD extends DialogFragment implements OnClickListener{
     	int _id=1;
     	try{
     	//You can test with huge number of items. Just set i=100
-    	for(int i=0;i<4;i++){
+    	for(int i=0;i<7;i++){
 	    		cursors_list.add(getCursorForAdapter(_id));
     	}
     	
@@ -100,20 +103,28 @@ public class FragmentDemoMD extends DialogFragment implements OnClickListener{
 
     	//---------Card Preview ------------
     	      
-    	json=new JSONObject("{title:{text:'Немюгюнский Хлебо-комбинат'}, text:{text:'"+getString(R.string.nhz_text)+"'}, image:{image_url:'http://eyakutia.com/wp-content/uploads/2012/04/yakutianhorserider_01.jpg'} }");    	
-    	matrixcursor.addRow(new Object[]{++_id,TYPE_CARD_PREVIEW,0,json.toString()});
-    	    	
+//    	json=new JSONObject("{title:{text:'Немюгюнский Хлебо-комбинат'}, text:{text:'"+getString(R.string.nhz_text)+"'}, image:{image_url:'http://eyakutia.com/wp-content/uploads/2012/04/yakutianhorserider_01.jpg'} }");    	
+//    	matrixcursor.addRow(new Object[]{++_id,TYPE_CARD_PREVIEW,0,json.toString()});
     	
-    	return matrixcursor;
+    	json=new JSONObject("{title:{text:'БЕЛЫЙ хлеб с зернами кукурузы'},price:{text:'68 р.'}, text:{text:'"+getString(R.string.nhz_text)+"'}, icon:{image_url:'http://eyakutia.com/wp-content/uploads/2012/04/yakutianhorserider_01.jpg'} }");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_CARD_PRODUCT,1,json.toString()});
+    	   
+    	json=new JSONObject("{title:{text:'ЧЕРНЫЙ хлеб с кориандром'},price:{text:'238 р.'}, text:{text:'"+getString(R.string.nhz_text)+"'}, icon:{image_url:'http://eyakutia.com/wp-content/uploads/2012/04/yakutianhorserider_01.jpg'} }");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_CARD_PRODUCT,2,json.toString()});
+    	    	
+    	json=new JSONObject("{title:{text:'Булка \"Пышка\"'},price:{text:'100 р.'}, text:{text:'"+getString(R.string.nhz_text)+"'}, icon:{image_url:'http://eyakutia.com/wp-content/uploads/2012/04/yakutianhorserider_01.jpg'} }");    	
+    	matrixcursor.addRow(new Object[]{++_id,TYPE_CARD_PRODUCT,3,json.toString()});
+    	return matrixcursor;    
+    	
+    	
+    	
     }
     
 //--------------Adapter Callbacks----------------------
      
 	@Override
 	public void onClick(View v) {
-		
-		
-		
+				
 			
 		toast("clicked");
 			

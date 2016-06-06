@@ -17,6 +17,19 @@
         <item name="android:orientation">vertical</item>
     </style>
     
+    <style name="Widget.CardItem" parent="android:Widget">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    
+    <style name="SpecialButton" parent="Widget.AppCompat.Button.Colored">
+	  <item name="colorButtonNormal">#0c660c</item>
+	  <item name="android:textColorPrimary">#fff</item>
+	</style>
+    
     <style name="style_button_dialog" parent="@android:style/Widget.Button">
     	<item name="android:background">@drawable/drawable_button_dialog_normal</item>
         <item name="android:width">@dimen/widget_width_medial</item>

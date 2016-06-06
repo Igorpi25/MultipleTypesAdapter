@@ -3,13 +3,15 @@
     <string name="app_name">MultipleTypesAdapter</string>
     <string name="logo">com.ivanov.tech.multipletypesadapter</string>
     <string name="subs">(demo activity)</string>
-    
+        
     <string name="ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
     cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
     bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
     cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
     the big cheese.</string>
-    <string name="nhz_text">молодое, перспективное, динамично развивающееся предприятие, занимающееся производством хлеба и хлебобулочных изделий с 2010 года.
-В 2011 году запущено здание хлебозавода общей площадью 420 кв.м., имеется два склада под хранение муки. Хлебопекарня на данный момент имеет большой спрос в сфере производства хлеба и хлебобулочных изделий. За два года работы создано 20 новых рабочих мест.
-Ежемесячно выпускается 30.0 тонн хлебаю В ассортименте 3 вида хлеба и 13 видов хлебобулочных и кондитерских изделий.</string>
+    
+    <string name="nhz_text">Динамично развивающееся предприятие, занимающееся производством хлеба и хлебобулочных изделий с 2010 года.
+	В 2011 году запущено здание хлебозавода общей площадью 420 кв.м., имеется два склада под хранение муки. Хлебопекарня на данный момент имеет большой спрос в сфере производства хлеба и хлебобулочных изделий. За два года работы создано 20 новых рабочих мест.
+	Ежемесячно выпускается 30.0 тонн хлебаю В ассортименте 3 вида хлеба и 13 видов хлебобулочных и кондитерских изделий.</string>
+
 </resources>
