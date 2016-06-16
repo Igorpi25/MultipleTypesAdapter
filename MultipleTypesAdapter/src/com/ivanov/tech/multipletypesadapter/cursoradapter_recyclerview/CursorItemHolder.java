@@ -15,7 +15,7 @@ public abstract class CursorItemHolder extends ViewHolder{
 		super(itemView);
 	}
 
-	Context context;
+	public Context context;
 	
 	public abstract void bindView(Cursor cursor);
 	

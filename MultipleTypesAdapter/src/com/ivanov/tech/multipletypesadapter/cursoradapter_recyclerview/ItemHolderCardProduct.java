@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 public class ItemHolderCardProduct extends CursorItemHolder{
 	
-	private static final String TAG = CursorItemHolderLink.class.getSimpleName();
+	private static final String TAG = ItemHolderCardProduct.class.getSimpleName();
 	
 	TextView textview_title,textview_text,textview_price;
 	ImageView imageview_icon;
@@ -52,16 +52,16 @@ public class ItemHolderCardProduct extends CursorItemHolder{
 		Log.d(TAG, "createClone");
 		
 		View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_product, parent, false);
+                .inflate(R.layout.product, parent, false);
 		
 		ItemHolderCardProduct itemholder=new ItemHolderCardProduct(view,context,onclicklistener);
 		
-		itemholder.textview_title = (TextView) view.findViewById(R.id.card_product_title);
-		itemholder.textview_text = (TextView) view.findViewById(R.id.card_product_text);
-		itemholder.textview_price = (TextView) view.findViewById(R.id.card_product_price);
-		itemholder.imageview_icon = (ImageView) view.findViewById(R.id.card_product_icon);
-		itemholder.button_order = (Button) view.findViewById(R.id.card_product_button_order);
-				
+		itemholder.textview_title = (TextView) view.findViewById(R.id.product_title);
+		itemholder.textview_text = (TextView) view.findViewById(R.id.product_text);
+		itemholder.textview_price = (TextView) view.findViewById(R.id.product_price);
+		itemholder.imageview_icon = (ImageView) view.findViewById(R.id.product_icon);
+		itemholder.button_order = (Button) view.findViewById(R.id.product_button_order);
+		
 		if(itemholder.onclicklistener!=null){
 			view.setOnClickListener(itemholder.onclicklistener);
 			itemholder.button_order.setOnClickListener(itemholder.onclicklistener);
@@ -90,7 +90,7 @@ public class ItemHolderCardProduct extends CursorItemHolder{
 			itemView.setTag(itemView.getId(), CursorMultipleTypesAdapter.getKey(cursor));				
 									
 		} catch (JSONException e) {
-			Log.e(TAG, "bindView ItemHolderCardPreview JSONException e="+e);
+			Log.e(TAG, "bindView JSONException e="+e);
 		}
 	}
 

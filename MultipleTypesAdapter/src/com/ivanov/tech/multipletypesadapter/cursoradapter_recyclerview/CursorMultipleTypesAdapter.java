@@ -21,7 +21,7 @@ public class CursorMultipleTypesAdapter extends CursorRecyclerViewAdapter<Cursor
 	public static final String COLUMN_KEY = "key";
 	public static final String COLUMN_VALUE = "value";  	
 	
-	protected HashMap<Integer,CursorItemHolder> hashmap=new HashMap<Integer,CursorItemHolder>();
+	public HashMap<Integer,CursorItemHolder> hashmap=new HashMap<Integer,CursorItemHolder>();
 		
 	public CursorMultipleTypesAdapter(Context context, Cursor cursor) {
 		super(context, cursor);

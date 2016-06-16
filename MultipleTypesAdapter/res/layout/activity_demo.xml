@@ -17,7 +17,7 @@
         android:id="@+id/main_container">
 
         <TextView
-            android:id="@+id/card_product_text"
+            android:id="@+id/subs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -31,10 +31,10 @@
             android:typeface="sans" />
 
         <TextView
-            android:id="@+id/card_product_title"
+            android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/card_product_text"
+            android:layout_above="@+id/subs"
             android:layout_centerHorizontal="true"
             android:text="@string/logo"
             android:textAppearance="?android:attr/textAppearanceLarge"

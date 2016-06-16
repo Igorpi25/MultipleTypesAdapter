@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 public class ItemHolderCardPreview extends CursorItemHolder{
 	
-	private static final String TAG = CursorItemHolderLink.class.getSimpleName();
+	private static final String TAG = ItemHolderCardPreview.class.getSimpleName();
 	
 	TextView textview_title,textview_text;
 	ImageView imageview;

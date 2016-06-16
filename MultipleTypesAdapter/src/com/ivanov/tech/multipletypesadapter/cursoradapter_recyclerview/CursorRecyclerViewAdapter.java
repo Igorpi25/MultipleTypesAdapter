@@ -30,7 +30,7 @@ public abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHold
 
     private Context mContext;
 
-    private Cursor mCursor;
+    public Cursor mCursor;
 
     private boolean mDataValid;
 
@@ -51,6 +51,29 @@ public abstract class CursorRecyclerViewAdapter<VH extends RecyclerView.ViewHold
 
     public Cursor getCursor() {
         return mCursor;
+    }
+    
+    public void setCursor(Cursor newCursor){
+    	if (newCursor == mCursor) {
+            return;
+        }
+        final Cursor oldCursor = mCursor;
+        if (oldCursor != null && mDataSetObserver != null) {
+            oldCursor.unregisterDataSetObserver(mDataSetObserver);
+        }
+        mCursor = newCursor;
+        if (mCursor != null) {
+            if (mDataSetObserver != null) {
+                mCursor.registerDataSetObserver(mDataSetObserver);
+            }
+            mRowIdColumn = newCursor.getColumnIndexOrThrow("_id");
+            mDataValid = true;
+        } else {
+            mRowIdColumn = -1;
+            mDataValid = false;
+            //There is no notifyDataSetInvalidated() method in RecyclerView.Adapter
+        }
+        oldCursor.close();
     }
 
     @Override
