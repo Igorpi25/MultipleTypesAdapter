@@ -48,7 +48,7 @@ public class ItemHolderCardOrderItem extends CursorItemHolder{
 	@Override
 	public CursorItemHolder createClone(ViewGroup parent) {	
 		
-		Log.d(TAG, "createClone");
+		//Log.d(TAG, "createClone");
 		
 		View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.order_item, parent, false);
@@ -75,7 +75,7 @@ public class ItemHolderCardOrderItem extends CursorItemHolder{
 		try {
 			json = new JSONObject(CursorMultipleTypesAdapter.getValue(cursor));
 			
-			Log.d(TAG, "bindView json="+json);
+			//Log.d(TAG, "bindView json="+json);
 						
 			new BinderTextView(context).bindText(textview_title, json.getJSONObject("title"));			
 			new BinderTextView(context).bindText(textview_price, json.getJSONObject("price"));

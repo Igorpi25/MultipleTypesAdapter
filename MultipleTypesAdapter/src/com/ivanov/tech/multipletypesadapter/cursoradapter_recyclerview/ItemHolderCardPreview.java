@@ -48,7 +48,7 @@ public class ItemHolderCardPreview extends CursorItemHolder{
 	@Override
 	public CursorItemHolder createClone(ViewGroup parent) {	
 		
-		Log.d(TAG, "createClone");
+		//Log.d(TAG, "createClone");
 		
 		View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_preview, parent, false);
@@ -71,16 +71,16 @@ public class ItemHolderCardPreview extends CursorItemHolder{
 		try {
 			json = new JSONObject(CursorMultipleTypesAdapter.getValue(cursor));
 			
-			Log.d(TAG, "bindView json="+json);
+			//Log.d(TAG, "bindView json="+json);
 			
-			new BinderTextView(context).bindText(textview_title, json.getJSONObject("title"));
+			new BinderTextView(context).bindText(textview_title, json.getJSONObject("name"));
 			
-			new BinderTextView(context).bindText(textview_text, json.getJSONObject("text"));
+			new BinderTextView(context).bindText(textview_text, json.getJSONObject("summary"));
 			
-			if(new BinderImageView(context).bind(imageview, json.getJSONObject("image"))){	
+			if(new BinderImageView(context).bind(imageview, json.getJSONObject("icon"))){	
 			}
 			
-			itemView.setTag(itemView.getId(), CursorMultipleTypesAdapter.getKey(cursor));				
+			itemView.setTag(R.layout.card_preview, CursorMultipleTypesAdapter.getKey(cursor));				
 									
 		} catch (JSONException e) {
 			Log.e(TAG, "bindView ItemHolderCardPreview JSONException e="+e);

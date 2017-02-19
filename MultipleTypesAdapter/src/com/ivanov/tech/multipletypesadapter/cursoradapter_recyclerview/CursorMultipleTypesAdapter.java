@@ -34,13 +34,13 @@ public class CursorMultipleTypesAdapter extends CursorRecyclerViewAdapter<Cursor
 
 	@Override
 	public void onBindViewHolder(CursorItemHolder itemHolder, Cursor cursor) {
-		Log.d(TAG, "onBindViewHolder");	
+		//Log.d(TAG, "onBindViewHolder");	
 		itemHolder.bindView(cursor);
 	}
 	
 	@Override
 	public CursorItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		Log.d(TAG, "onCreateViewHolder");		
+		//Log.d(TAG, "onCreateViewHolder");		
 		return hashmap.get(viewType).createClone(parent);
 	}
 	

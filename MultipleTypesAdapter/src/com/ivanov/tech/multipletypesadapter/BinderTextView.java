@@ -7,6 +7,7 @@ import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorItemHolderLink;
 import com.ivanov.tech.multipletypesadapter.cursoradapter.CursorMultipleTypesAdapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -39,7 +40,7 @@ public class BinderTextView extends Binder<TextView> {
 			else 
 				textview.setTag(null);
 			
-			textview.setText(json.getString("text"));		
+			textview.setText(Html.fromHtml(json.getString("text")));		
 			textview.setTextColor(context.getResources().getColorStateList(json.getInt("text_color")));
 			textview.setTextSize(json.getInt("text_size_unit"),(float)json.getDouble("text_size"));
 			
@@ -64,7 +65,12 @@ public class BinderTextView extends Binder<TextView> {
 	}
 
 	public BinderTextView bindText(TextView textview, JSONObject json) throws JSONException{
-		textview.setText(json.getString("text"));
+		textview.setText(Html.fromHtml(json.getString("text")));
+		return this;
+	}
+	
+	public BinderTextView bindVisible(TextView textview, JSONObject json) throws JSONException{
+		textview.setVisibility(json.getBoolean("visible")?View.VISIBLE:View.GONE);
 		return this;
 	}
 }

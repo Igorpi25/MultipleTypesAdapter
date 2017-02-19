@@ -28,5 +28,9 @@
     <color name="color_text_gray">#bfbfbf</color>
     
     <color name="color_mat">#EEE</color>
+    
+    <color name="colorPrimary">#0c660c</color>
+    <color name="colorPrimaryDark">#094d09</color>
+    <color name="colorAccent">#96d936</color>
 
 </resources>

@@ -57,7 +57,7 @@ public class ItemHolderNestedAdapter extends CursorItemHolder{
 	@Override
 	public CursorItemHolder createClone(ViewGroup parent) {	
 		
-		Log.d(TAG, "createClone");
+		//Log.d(TAG, "createClone");
 		
 		View view = LayoutInflater.from(parent.getContext())
                 .inflate(layout, parent, false);
@@ -116,7 +116,7 @@ public class ItemHolderNestedAdapter extends CursorItemHolder{
 	    	JSONArray jsonarray;
 			try {
 				jsonarray = new JSONArray(CursorMultipleTypesAdapter.getValue(params[0]));
-				Log.d(TAG, "ProcessCursor doInBackground jsonarray="+jsonarray.toString());
+				//Log.d(TAG, "ProcessCursor doInBackground jsonarray="+jsonarray.toString());
 				
 				int _id=0;
 				
